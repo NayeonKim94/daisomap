@@ -68,39 +68,15 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.07);
       background: #fff;
     }
-    #ad-vertical {
-      flex: none;
-      width: 140px;
-      min-width: 120px;
-      max-width: 180px;
-      height: 680px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      margin-left: 0;
-    }
     @media (max-width: 1000px) {
       #container { max-width: 99vw; padding: 3vw;}
       #map-ad-wrap { gap:10px;}
-      #ad-vertical { width:120px; min-width:90px; height:320px;}
       #map { height:240px;}
     }
     @media (max-width: 700px) {
       #map-ad-wrap {
         flex-direction: column;
         gap: 10px;
-      }
-      #ad-vertical {
-        width: 100%;
-        min-width: 0;
-        max-width: 100vw;
-        height: 120px;
-        padding-bottom: 10px;
       }
       #map {
         height: 200px;
@@ -145,7 +121,7 @@
     <div id="results"></div>
     <div id="map-ad-wrap">
       <div id="map"></div>
-      <div id="ad-vertical"></div>
+      <!-- 광고는 여기 X, 따로 스크립트만 붙임 -->
     </div>
   </div>
   <footer>
@@ -160,8 +136,18 @@
     </div>
     © <span id="year"></span> 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: Nayeon Kim
   </footer>
-  <!-- 쿠팡 광고 JS (딱 1번만!) -->
+  <!-- 쿠팡 광고 JS (공식 방식: 위치 지정 불가, 그냥 페이지 아무데나 붙이기) -->
   <script src="https://ads-partners.coupang.com/g.js"></script>
+  <script>
+    new PartnersCoupang.G({
+      "id": 887292,
+      "template": "carousel",
+      "trackingCode": "AF1267708",
+      "width": "140",
+      "height": "680",
+      "tsource": ""
+    });
+  </script>
   <!-- 카카오맵 JS -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32b4338378d7c102f93e7548e7db28e4"></script>
   <script>
@@ -262,18 +248,6 @@
     // 페이지 처음엔 전체 매장 보여주기
     showResults(stores);
     showStores(stores);
-
-    // 광고는 반드시 지도 오른쪽에만!
-    window.onload = function() {
-      new PartnersCoupang.G({
-        "id": 887292,
-        "template": "carousel",
-        "trackingCode": "AF1267708",
-        "width": "140",
-        "height": "680",
-        "tsource": ""
-      }).attachTo(document.getElementById("ad-vertical"));
-    };
   </script>
 </body>
 </html>
