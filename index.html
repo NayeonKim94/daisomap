@@ -6,40 +6,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', Arial, sans-serif; margin: 0; padding: 0; background: #fafafd; }
-    h1 { text-align: center; margin: 20px 0 10px 0; font-size: 2em; }
+    #inapp-alert {
+      display: none;
+      width: 100%;
+      box-sizing: border-box;
+      position: fixed;
+      top: 0; left: 0; z-index: 9999;
+      padding: 16px 10px 14px 10px;
+      background: #fff5f7;
+      color: #C91C48;
+      text-align: center;
+      font-size: 1.06em;
+      font-weight: 600;
+      border-bottom: 1.7px solid #F3A2B0;
+      letter-spacing: -0.02em;
+      transition: all 0.25s;
+    }
+    #inapp-alert b {
+      color: #D72660;
+    }
+    #inapp-alert .close-btn {
+      position: absolute;
+      right: 18px; top: 13px;
+      font-size: 1.15em;
+      color: #C91C48;
+      background: none;
+      border: none;
+      cursor: pointer;
+      opacity: 0.55;
+      font-weight: bold;
+    }
+    h1 { text-align: center; margin: 44px 0 10px 0; font-size: 2em; }
     #container { max-width: 900px; margin: auto; padding: 10px;}
     #searchBox { margin-bottom: 12px; width: 100%; max-width: 400px; padding: 10px; font-size: 1.1em; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; display: block; margin-left: auto; margin-right: auto;}
     #results { margin-bottom:15px; background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); font-size: 1em;}
     .store-item { padding:12px; border-bottom:1px solid #f0f0f0; cursor:pointer; transition: background 0.15s;}
     .store-item:hover, .store-item:active { background:#ffe4e1; }
     .no-result { color:#E13A3A; padding:16px; text-align:center; }
-    #map {
-      display: block;
-      width: 100%;
-      min-width: 200px;
-      min-height: 320px;
-      height: 400px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      background: #fff;
-      margin-bottom: 20px;
-    }
+    #map { display: block; width: 100%; min-width: 200px; min-height: 320px; height: 400px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); background: #fff; margin-bottom: 20px;}
     @media (max-width: 1000px) {
       #container { max-width: 99vw; padding: 3vw;}
       #map { height:240px; min-height:180px;}
     }
     @media (max-width: 700px) {
-      #map { height: 180px; min-height: 140px; }
-      h1 { font-size: 1.3em; }
-      #searchBox { font-size:1em; }
+      #inapp-alert { font-size:0.97em; padding:12px 2vw 10px 2vw; }
+      h1 { font-size: 1.2em; margin-top: 52px;}
+      #map { height: 160px; min-height: 120px;}
       .store-item { font-size: 0.98em; }
       .disclaimer, .adnotice { font-size: 0.82em; }
-      footer {
-        font-size: 0.84em;
-        line-height: 1.7;
-        padding-left: 2vw;
-        padding-right: 2vw;
-      }
+      footer { font-size: 0.82em; line-height: 1.7; padding-left: 2vw; padding-right: 2vw;}
     }
     footer {
       text-align: center; color: #888; margin: 30px 0 15px 0; font-size: 0.97em; line-height: 1.8; background: none; padding-left: 8vw; padding-right: 8vw;
@@ -49,6 +64,12 @@
   </style>
 </head>
 <body>
+  <!-- 카톡 인앱 브라우저 안내 알림 -->
+  <div id="inapp-alert">
+    ⚠️ <b>카카오톡 인앱 브라우저에서는 지도가 보이지 않을 수 있습니다.</b><br>
+    <span style="font-size:0.98em; font-weight:400;">오른쪽 위 <b>⋮</b> 메뉴 또는 <b>Safari/Chrome으로 열기</b>를 선택해 주세요.</span>
+    <button class="close-btn" onclick="document.getElementById('inapp-alert').style.display='none';">&times;</button>
+  </div>
   <div id="container">
     <h1>다이소 가맹점 지도 (비공식)</h1>
     <input type="text" id="searchBox" placeholder="지역명으로 검색 (예: 경주)">
@@ -57,13 +78,17 @@
   </div>
   <footer>
     <div class="adnotice">
-      이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+      이 포스팅은 쿠팡 파트너스 활동의 일환으로,<br>
+      이에 따른 일정액의 수수료를 제공받습니다.
     </div>
     <div class="disclaimer">
-      ※ 본 사이트는 다이소 및 아성다이소와 무관한 비공식 서비스입니다. 매장 정보의 정확성은 보장되지 않을 수 있으며, 공식 정보는 다이소 홈페이지를 참고해주세요.
+      ※ 본 사이트는 다이소 및 아성다이소와 무관한 비공식 서비스입니다.<br>
+      매장 정보의 정확성은 보장되지 않을 수 있으며,<br>
+      공식 정보는 다이소 홈페이지를 참고해주세요.
     </div>
     © <span id="year"></span> 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: Nayeon Kim
   </footer>
+  <!-- 쿠팡 광고 JS -->
   <script src="https://ads-partners.coupang.com/g.js"></script>
   <script>
     new PartnersCoupang.G({
@@ -75,10 +100,29 @@
       "tsource": ""
     });
   </script>
+  <!-- 카카오맵 JS -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32b4338378d7c102f93e7548e7db28e4"></script>
   <script>
+    // 인앱 브라우저 감지 (카톡, 네이버, 페북 등)
+    (function() {
+      var ua = navigator.userAgent.toLowerCase();
+      var inApp = (
+        ua.indexOf('kakaotalk') > -1 ||
+        ua.indexOf('naver') > -1 ||
+        ua.indexOf('fbav') > -1 ||
+        ua.indexOf('instagram') > -1
+      );
+      if (inApp) {
+        document.getElementById('inapp-alert').style.display = 'block';
+        // body에 top margin 자동 부여(모바일에서도 상단 가림 방지)
+        document.body.style.marginTop = '54px';
+      }
+    })();
+
+    // 저작권 연도 자동 입력
     document.getElementById('year').innerText = new Date().getFullYear();
 
+    // 빨간색 마커 이미지 (카카오 공식)
     var redMarkerUrl = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
 
     var stores = [
