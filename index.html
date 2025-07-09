@@ -195,8 +195,7 @@
       filteredStores.forEach(function(store, idx){
         var infowindow = new kakao.maps.InfoWindow({
           content:
-            `<div style="
-                max-width:370px; min-width:170px; width:auto;
+            `<div style="max-width:370px; min-width:170px; width:auto;
                 word-break:keep-all; white-space:normal;
                 font-size:15px; line-height:1.7; padding:12px 15px;
                 font-family:'Malgun Gothic',Arial,sans-serif;
@@ -264,7 +263,7 @@
     showResults(stores);
     showStores(stores);
 
-    // ★★★★★ 쿠팡 광고를 반드시 지도 오른쪽 div에만 붙이기 ★★★★★
+    // 광고는 반드시 지도 오른쪽에만!
     window.onload = function() {
       new PartnersCoupang.G({
         "id": 887292,
