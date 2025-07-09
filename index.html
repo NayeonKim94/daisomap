@@ -36,7 +36,7 @@
       opacity: 0.55;
       font-weight: bold;
     }
-    h1 { text-align: center; margin: 44px 0 10px 0; font-size: 2em; }
+    h1 { text-align: center; margin: 44px 0 10px 0; font-size: 2em; letter-spacing: 0.03em; }
     #container { max-width: 900px; margin: auto; padding: 10px;}
     #searchBox { margin-bottom: 12px; width: 100%; max-width: 400px; padding: 10px; font-size: 1.1em; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; display: block; margin-left: auto; margin-right: auto;}
     #results { margin-bottom:15px; background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); font-size: 1em;}
@@ -66,12 +66,14 @@
 <body>
   <!-- 카톡 인앱 브라우저 안내 알림 -->
   <div id="inapp-alert">
-    ⚠️ <b>카카오톡 인앱 브라우저에서는 지도가 보이지 않을 수 있습니다.</b><br>
-    <span style="font-size:0.98em; font-weight:400;">오른쪽 위 <b>⋮</b> 메뉴 또는 <b>Safari/Chrome으로 열기</b>를 선택해 주세요.</span>
+    ⚠️ <b>카카오톡에서는 지도가 보이지 않을 수 있습니다.</b><br>
+    <span style="font-size:0.98em; font-weight:400;">
+      오른쪽 위 <b>⋮</b> 메뉴 또는 하단 <b>↑</b> 메뉴에서 <b>Safari/Chrome으로 열기</b>를 선택해 주세요.
+    </span>
     <button class="close-btn" onclick="document.getElementById('inapp-alert').style.display='none';">&times;</button>
   </div>
   <div id="container">
-    <h1>다이소 가맹점 지도 (비공식)</h1>
+    <h1>2025 다이소 가맹점 지도 (비공식)</h1>
     <input type="text" id="searchBox" placeholder="지역명으로 검색 (예: 경주)">
     <div id="results"></div>
     <div id="map"></div>
@@ -114,7 +116,6 @@
       );
       if (inApp) {
         document.getElementById('inapp-alert').style.display = 'block';
-        // body에 top margin 자동 부여(모바일에서도 상단 가림 방지)
         document.body.style.marginTop = '54px';
       }
     })();
