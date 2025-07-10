@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="utf-8">
-  <title>2025 다이소 가맹점 지도</title>
+  <title>2025 다이소 가맹점 지도 (비공식)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 구글/네이버 검색 등록용 -->
   <meta name="google-site-verification" content="WnF2ei0gbsnq-e36FIffn4uhUWwkS6yNiJsrByOPc3Q" />
   <meta name="naver-site-verification" content="bc03a3756485fc617c2a7704a949f03e25983825" />
   <style>
@@ -12,29 +13,27 @@
       margin: 0; padding: 0;
       background: #fafafd;
     }
-    h1 {
+    .title-main {
+      font-size: 2.9em;
       text-align: center;
-      margin: 26px 0 6px 0;
-      font-size: 2.8em;
-      letter-spacing: 0.03em;
+      font-weight: bold;
+      margin-top: 25px;
+      margin-bottom: 14px;
+      letter-spacing: 0.01em;
     }
-    .kakao-notice {
+    .kakao-guide {
       display: none;
-      margin: 0 auto 12px auto;
-      max-width: 92vw;
-      background: #fff6f7;
-      color: #e13a3a;
-      border-radius: 22px;
-      font-size: 0.82em;
-      font-weight: 500;
+      max-width: 420px;
+      margin: 0 auto 20px auto;
+      background: #fff8f1;
+      color: #d04911;
+      font-size: 1em;
+      border-radius: 16px;
+      padding: 13px 18px 10px 18px;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(229, 24, 54, 0.05);
-      padding: 13px 18px 12px 18px;
-      position: relative;
-      z-index: 2;
-      border: 1px solid #ffd7e1;
-      line-height: 1.65;
       word-break: keep-all;
+      box-shadow: 0 1px 4px rgba(170,100,0,0.09);
+      line-height: 1.6;
     }
     #container {
       max-width: 900px;
@@ -75,129 +74,136 @@
       padding:16px;
       text-align:center;
     }
+    #map-ad-wrap {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
     #map {
-      width: 100%;
+      flex: 1 1 0;
+      min-width: 0;
       height: 400px;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.07);
       background: #fff;
-      margin-bottom: 10px;
-      min-height: 200px;
     }
-    .counter-box {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin: 5px 0 0 0;
-      font-size: 0.93em;
-      color: #b2b2b2;
-      padding-right: 8px;
-      user-select: none;
-      pointer-events: none;
-      font-family: 'Consolas', 'Menlo', 'monospace', Arial, sans-serif;
+    @media (max-width: 1000px) {
+      .title-main { font-size: 2em; }
+      #container { max-width: 99vw; padding: 3vw;}
+      #map-ad-wrap { gap:10px;}
+      #map { height:240px;}
     }
-    .counter-box b { color: #444; font-weight: 600; margin-left:2px;}
+    @media (max-width: 700px) {
+      .title-main { font-size: 1.3em; }
+      .kakao-guide { font-size: 0.97em; padding: 9px 9px 8px 9px; }
+      #map-ad-wrap { flex-direction: column; gap: 10px; }
+      #map { height: 200px; }
+      #searchBox { font-size:1em; }
+      .store-item { font-size: 0.98em; }
+      .disclaimer, .adnotice, .copyright { font-size: 0.72em; }
+      footer { font-size: 0.72em; line-height: 1.6; }
+    }
     footer {
       text-align: center;
-      color: #111;
-      margin: 24px 0 13px 0;
-      font-size: 0.74em;
-      line-height: 1.65;
+      color: #222;
+      margin: 30px 0 15px 0;
+      font-size: 0.89em;
+      line-height: 1.7;
       background: none;
-      padding: 0;
-      font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', Arial, sans-serif;
+      padding-left: 2vw;
+      padding-right: 2vw;
     }
     .adnotice, .copyright {
       color: #111;
-      font-size: inherit;
-      margin-bottom: 2px;
+      font-size: 0.78em;
+      margin-bottom: 1px;
+      margin-top: 1px;
       letter-spacing: 0.01em;
     }
     .disclaimer {
       color: #DA0037;
-      font-size: inherit;
-      margin-bottom: 2px;
+      font-size: 0.78em;
+      margin-bottom: 1px;
+      margin-top: 1px;
       letter-spacing: 0.01em;
     }
-    @media (max-width: 700px) {
-      h1 { font-size: 1.18em; }
-      .kakao-notice { font-size: 0.76em; padding: 9px 5vw 9px 5vw; }
-      #container { padding: 3vw; }
-      #map { height: 220px; }
-      .counter-box { font-size: 0.81em; padding-right: 2px; }
-      footer { font-size: 0.69em; }
+    .counterbox {
+      text-align:center;
+      margin:10px 0 0 0;
+      font-size: 1em;
     }
+    .counterbox img { vertical-align:middle; margin-left:6px; }
   </style>
 </head>
 <body>
-  <h1>🟥 2025 다이소 가맹점 지도 🟥</h1>
-  <div id="kakaoNotice" class="kakao-notice">
-    ⚠️ 카카오톡에서는 지도가 보이지 않을 수 있습니다. 오른쪽 위 <b>⋮</b> 메뉴 또는 하단 <b>↑</b> 메뉴에서 <b>Safari/Chrome으로 열기</b>를 선택해 주세요, 또는
-  </div>
   <div id="container">
+    <div class="title-main">🟥 2025 다이소 가맹점 지도 🟥</div>
+    <div id="kakaoNotice" class="kakao-guide">
+      ⚠️ 카카오톡에서는 지도가 보이지 않을 수 있습니다.<br>
+      오른쪽 위 <b>⋮</b> 버튼 또는, 하단 <b>↑</b> 버튼에서 <b>Safari/Chrome으로 열기</b>를 선택해 주세요!
+    </div>
     <input type="text" id="searchBox" placeholder="지역명으로 검색 (예: 경주)">
     <div id="results"></div>
-    <div id="map"></div>
-    <div class="counter-box" id="todayCounter">Today <b>0</b></div>
+    <div id="map-ad-wrap">
+      <div id="map"></div>
+    </div>
+    <div class="counterbox">
+      Today
+      <!-- Statcounter 방문자 카운터(클릭 가능) -->
+      <a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank">
+        <img class="statcounter" src="https://c.statcounter.com/13149890/0/a878f572/0/" alt="Web Analytics Made Easy - Statcounter" referrerPolicy="no-referrer-when-downgrade">
+      </a>
+    </div>
   </div>
   <footer>
-    <div class="adnotice">
-      이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-    </div>
-    <div class="disclaimer">
-      ※ 본 사이트는 다이소 및 아성다이소와 무관한 비공식 서비스입니다. 매장 정보의 정확성은 보장되지 않을 수 있으며, 공식 정보는 다이소 홈페이지를 참고해주세요.
-    </div>
-    <div class="copyright">
-      © 2025 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: nayeonkim8294@gmail.com
-    </div>
+    <div class="adnotice">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</div>
+    <div class="disclaimer">※ 본 사이트는 다이소 및 아성다이소와 무관한 비공식 서비스입니다. 매장 정보의 정확성은 보장되지 않을 수 있으며, 공식 정보는 다이소 홈페이지를 참고해주세요.</div>
+    <div class="copyright">© <span id="year"></span> 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: nayeonkim8294@gmail.com</div>
   </footer>
-  <!-- Statcounter 방문자수 카운터 (Today만) -->
+  <!-- Statcounter JS (방문자 카운터) -->
   <script type="text/javascript">
-    function updateTodayCounter(num) {
-      document.getElementById("todayCounter").innerHTML = "Today <b>" + num + "</b>";
-    }
-    (function() {
-      var sc_project=13149890; 
-      var sc_invisible=1; 
-      var sc_security="a878f572"; 
-      var img = new Image();
-      img.src = "https://c.statcounter.com/"+sc_project+"/0/"+sc_security+"/0/";
-      img.onload = function(){
-        setTimeout(function(){
-          fetch('https://statcounter.com/p13149890/summary/?guest=1')
-          .then(r=>r.text()).then(html=>{
-            var m = html.match(/오늘[\s\S]*?([0-9,]+)[^\d]/) || html.match(/Today[\s\S]*?([0-9,]+)[^\d]/);
-            var today = m ? (m[1].replace(/,/g,'')) : "0";
-            updateTodayCounter(today);
-          });
-        }, 1200);
-      };
-    })();
+    var sc_project=13149890; 
+    var sc_invisible=0; 
+    var sc_security="a878f572"; 
+    var scJsHost = "https://";
+    document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+"statcounter.com/counter/counter.js'></"+"script>");
   </script>
+  <noscript>
+    <div class="statcounter">
+      <a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank">
+        <img class="statcounter" src="https://c.statcounter.com/13149890/0/a878f572/0/" alt="Web Analytics Made Easy - Statcounter" referrerPolicy="no-referrer-when-downgrade">
+      </a>
+    </div>
+  </noscript>
   <!-- 카카오맵 JS -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32b4338378d7c102f93e7548e7db28e4"></script>
   <script>
-    function isKakaoAppWebView() {
+    // 저작권 연도 자동 입력
+    document.getElementById('year').innerText = new Date().getFullYear();
+
+    // 카카오톡 앱 감지해서 안내문구 노출
+    function isKakaoApp() {
       var ua = navigator.userAgent.toLowerCase();
-      return ua.indexOf("kakaotalk") > -1;
+      return ua.indexOf('kakaotalk') > -1;
     }
-    if(isKakaoAppWebView()) {
-      document.getElementById("kakaoNotice").style.display = "block";
+    if (isKakaoApp()) {
+      document.getElementById('kakaoNotice').style.display = 'block';
     }
 
-    var redMarkerUrl = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
+    // 매장 데이터
     var stores = [
       {name: "다이소 경주점", lat: 35.8562, lng: 129.2247, address: "경북 경주시 원화로 295", tel: "054-000-0000"},
       {name: "다이소 경주터미널점", lat: 35.8434, lng: 129.2033, address: "경북 경주시 구황로 36", tel: "054-111-2222"},
       {name: "다이소 서울점", lat: 37.5665, lng: 126.9780, address: "서울특별시 중구 세종대로 110", tel: "02-333-4444"},
       {name: "다이소 부산점", lat: 35.1796, lng: 129.0756, address: "부산광역시 중구 중앙대로 26", tel: "051-555-6666"}
     ];
+    // 지도 세팅
     var mapContainer = document.getElementById('map'),
         mapOption = {center: new kakao.maps.LatLng(36.5, 127.9), level: 7};
     var map = new kakao.maps.Map(mapContainer, mapOption);
-    var markers = [];
-    var infowindows = [];
+    var redMarkerUrl = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
+    var markers = [], infowindows = [];
     function showStores(filteredStores) {
       markers.forEach(function(marker){ marker.setMap(null); });
       infowindows.forEach(function(iw){ iw.close(); });
