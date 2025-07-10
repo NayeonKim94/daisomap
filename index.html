@@ -19,11 +19,11 @@
       box-sizing: border-box;
       position: fixed;
       top: 0; left: 0; z-index: 9999;
-      padding: 16px 10px 14px 10px;
+      padding: 14px 10px 12px 10px;
       background: #fff5f7;
       color: #C91C48;
       text-align: center;
-      font-size: 1.06em;
+      font-size: 0.93em; /* 기존보다 2pt(픽셀) 감소 */
       font-weight: 600;
       border-bottom: 1.7px solid #F3A2B0;
       letter-spacing: -0.02em;
@@ -34,8 +34,8 @@
     }
     #inapp-alert .close-btn {
       position: absolute;
-      right: 18px; top: 13px;
-      font-size: 1.15em;
+      right: 18px; top: 9px;
+      font-size: 1.08em;
       color: #C91C48;
       background: none;
       border: none;
@@ -43,7 +43,13 @@
       opacity: 0.55;
       font-weight: bold;
     }
-    h1 { text-align: center; margin: 44px 0 10px 0; font-size: 2em; letter-spacing: 0.03em; }
+    h1 {
+      text-align: center;
+      margin: 52px 0 14px 0;
+      font-size: 2em;
+      letter-spacing: 0.03em;
+      font-family: inherit;
+    }
     #container { max-width: 900px; margin: auto; padding: 10px;}
     #searchBox { margin-bottom: 12px; width: 100%; max-width: 400px; padding: 10px; font-size: 1.1em; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; display: block; margin-left: auto; margin-right: auto;}
     #results { margin-bottom:15px; background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); font-size: 1em;}
@@ -58,11 +64,12 @@
       #coupang-ad-horizontal { max-width: 99vw; }
     }
     @media (max-width: 800px) {
-      h1 { font-size: 1.15em; margin-top: 52px;}
+      h1 { font-size: 1.13em; margin-top: 52px;}
       #map { height: 160px; min-height: 120px;}
       .store-item { font-size: 0.98em; }
       .disclaimer, .adnotice { font-size: 0.82em; }
       footer { font-size: 0.82em; line-height: 1.7; padding-left: 2vw; padding-right: 2vw;}
+      #inapp-alert { font-size: 0.81em; padding: 9px 2vw 8px 2vw; }
     }
     @media (max-width: 720px) {
       #coupang-ad-horizontal { max-width: 98vw; min-width:0; }
@@ -84,7 +91,7 @@
     <button class="close-btn" onclick="document.getElementById('inapp-alert').style.display='none';">&times;</button>
   </div>
   <div id="container">
-    <h1>2025 다이소 가맹점 지도 (비공식)</h1>
+    <h1><span style="color:#D72660;">🟥</span> 2025 다이소 가맹점 지도 <span style="color:#D72660;">🟥</span></h1>
     <input type="text" id="searchBox" placeholder="지역명으로 검색 (예: 경주)">
     <div id="results"></div>
     <div id="map"></div>
@@ -103,12 +110,12 @@
   <!-- 쿠팡 광고 JS (한번만) -->
   <script src="https://ads-partners.coupang.com/g.js"></script>
   <script>
-    // 가로형 광고 코드
+    // 가로형 광고 코드(340x140)
     new PartnersCoupang.G({
       "id": 887502,
       "template": "carousel",
       "trackingCode": "AF1267708",
-      "width": "680",
+      "width": "340",
       "height": "140",
       "tsource": ""
     }).attachTo(document.getElementById("coupang-ad-horizontal"));
@@ -127,7 +134,7 @@
       );
       if (inApp) {
         document.getElementById('inapp-alert').style.display = 'block';
-        document.body.style.marginTop = '54px';
+        document.body.style.marginTop = '44px';
       }
     })();
 
