@@ -4,9 +4,8 @@
   <meta charset="utf-8">
   <title>2025 다이소 가맹점 지도 (비공식)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- 구글 소유확인 (예시) -->
+  <!-- 네이버/구글 사이트 소유확인용 -->
   <meta name="google-site-verification" content="WnF2ei0gbsnq-e36FIffn4uhUWwkS6yNiJsrByOPc3Q" />
-  <!-- 네이버 소유확인 -->
   <meta name="naver-site-verification" content="bc03a3756485fc617c2a7704a949f03e25983825" />
   <style>
     body {
@@ -14,31 +13,28 @@
       margin: 0; padding: 0;
       background: #fafafd;
     }
-    .notice {
-      background: #fff7e6;
-      color: #bb7200;
-      text-align: center;
-      font-size: 0.93em;
-      padding: 8px 0 7px 0;
-      border-bottom: 1px solid #ffefca;
-      font-weight: 500;
-      letter-spacing: -0.1em;
-    }
-    h1 {
-      text-align: center;
+    .headline {
+      color: #222;
+      font-size: 1.4em;
+      background: none;
       margin: 20px 0 10px 0;
-      font-size: 2em;
-      letter-spacing: -0.05em;
+      letter-spacing: -1px;
+      font-weight: 700;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
     }
-    .redbox {
-      background: #E13A3A;
+    .headline .red-box {
       color: #fff;
-      border-radius: 6px;
-      padding: 2px 12px 2px 12px;
-      font-size: 0.98em;
-      margin: 0 5px;
-      font-weight: bold;
-      letter-spacing: 0;
+      background: #DA0037;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 1em;
+      display: inline-block;
+      font-weight: 700;
+      letter-spacing: 2px;
     }
     #container {
       max-width: 900px;
@@ -81,102 +77,115 @@
     }
     #map {
       width: 100%;
-      min-height: 330px;
-      height: 380px;
+      min-height: 340px;
+      max-height: 460px;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.07);
       background: #fff;
-      margin-bottom: 12px;
+      margin-bottom: 24px;
     }
-    #ad-horizontal {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 12px auto 10px auto;
-      max-width: 430px;
-      min-width: 220px;
-      width: 100%;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      min-height: 150px;
+    .alert-kakaotalk {
+      text-align: center;
+      background: #fff7ea;
+      color: #DA0037;
+      font-size: 0.78em;
+      font-weight: 500;
+      border-radius: 7px;
+      padding: 10px 3vw;
+      margin: 18px auto 12px auto;
+      max-width: 480px;
+      border: 1.5px solid #f5e1cf;
+      line-height: 1.7;
+      word-break: keep-all;
+      display: none;
+    }
+    .notice-area {
+      text-align: center;
+      font-size: 0.73em;
+      line-height: 1.7;
+      margin: 34px 0 13px 0;
+      letter-spacing: -0.5px;
+    }
+    .notice-coupang, .notice-copyright {
+      color: #111;
+      margin-bottom: 1px;
+    }
+    .notice-unofficial {
+      color: #DA0037;
+      margin-bottom: 1px;
     }
     @media (max-width: 700px) {
-      h1 { font-size: 1.19em; }
-      .redbox { font-size: 0.96em; padding:2px 9px;}
-      #container { max-width: 99vw; padding: 2vw;}
-      #searchBox { font-size:0.98em; }
-      .store-item { font-size: 0.97em; }
-      .notice { font-size: 0.80em; padding:5px 0 6px 0;}
-      #map { min-height: 210px; height: 220px; }
-      #ad-horizontal { max-width: 98vw; min-height: 120px; }
-      .disclaimer, .adnotice { font-size: 0.82em; }
-      footer { font-size: 0.84em; line-height: 1.7; padding-left: 2vw; padding-right: 2vw; }
-    }
-    footer {
-      text-align: center;
-      color: #888;
-      margin: 30px 0 15px 0;
-      font-size: 0.97em;
-      line-height: 1.8;
-      background: none;
-      padding-left: 8vw;
-      padding-right: 8vw;
-    }
-    .adnotice {
-      color: #111;
-      font-size: 0.87em;
-      margin-bottom: 3px;
-    }
-    .disclaimer {
-      color: #DA0037;
-      font-size: 0.87em;
-      margin-bottom: 4px;
+      #container { max-width: 99vw; padding: 3vw;}
+      #map { min-height: 210px; }
+      .headline { font-size: 1em;}
+      #searchBox { font-size:1em; }
+      .store-item { font-size: 0.96em; }
+      .notice-area { font-size: 0.67em; }
+      .alert-kakaotalk { font-size: 0.61em; }
     }
   </style>
 </head>
 <body>
-  <div class="notice" id="kakao-notice" style="display:none;">
-    카카오톡에서는 지도가 보이지 않을 수 있습니다. 오른쪽 위 <b>⋮</b> 메뉴 또는 하단 <b>↑</b> 메뉴에서 <b>Safari/Chrome으로 열기</b>를 선택해 주세요.
-  </div>
   <div id="container">
-    <h1>
-      <span class="redbox">2025</span>
-      다이소 가맹점 지도
-      <span class="redbox">2025</span>
-    </h1>
+    <div class="headline">
+      <span class="red-box">🟥</span>
+      2025 다이소 가맹점 지도
+      <span class="red-box">🟥</span>
+    </div>
+    <div class="alert-kakaotalk" id="alertKakao">
+      카카오톡에서는 지도가 보이지 않을 수 있습니다.<br>
+      오른쪽 위 <b>⋮</b> 메뉴 또는 하단 <b>↑</b> 메뉴에서 <b>Safari/Chrome으로 열기</b>를 선택해 주세요.
+    </div>
     <input type="text" id="searchBox" placeholder="지역명으로 검색 (예: 경주)">
     <div id="results"></div>
     <div id="map"></div>
-    <div id="ad-horizontal"></div>
   </div>
-  <footer>
-    <div class="adnotice">
+
+  <!-- 쿠팡 광고: 원하는 곳에 넣으세요 -->
+  <div style="max-width:900px;margin:24px auto 0 auto;">
+    <script src="https://ads-partners.coupang.com/g.js"></script>
+    <script>
+      new PartnersCoupang.G({
+        "id": 887502,
+        "template": "carousel",
+        "trackingCode": "AF1267708",
+        "width": "400",
+        "height": "140",
+        "tsource": ""
+      });
+    </script>
+  </div>
+
+  <div class="notice-area">
+    <div class="notice-coupang">
       이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
     </div>
-    <div class="disclaimer">
+    <div class="notice-unofficial">
       ※ 본 사이트는 다이소 및 아성다이소와 무관한 비공식 서비스입니다. 매장 정보의 정확성은 보장되지 않을 수 있으며, 공식 정보는 다이소 홈페이지를 참고해주세요.
     </div>
-    © <span id="year"></span> 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: Nayeon Kim
-  </footer>
-  <!-- 쿠팡 광고 JS (딱 1번만!) -->
-  <script src="https://ads-partners.coupang.com/g.js"></script>
+    <div class="notice-copyright">
+      © <span id="year"></span> 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: Nayeon Kim
+    </div>
+  </div>
+
   <!-- 카카오맵 JS -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32b4338378d7c102f93e7548e7db28e4"></script>
   <script>
     // 저작권 연도 자동 입력
     document.getElementById('year').innerText = new Date().getFullYear();
 
-    // 카톡 자동감지(상단 안내문구 표시)
-    function isKakaoApp() {
-      var ua = navigator.userAgent.toLowerCase();
-      return ua.indexOf("kakaotalk") > -1;
+    // 카톡/인앱 브라우저 감지 안내
+    function isKakaoInApp() {
+      const ua = navigator.userAgent.toLowerCase();
+      return ua.indexOf('kakaotalk') > -1;
     }
-    if(isKakaoApp()) {
-      document.getElementById('kakao-notice').style.display = "block";
-    }
+    window.onload = function() {
+      if(isKakaoInApp()) {
+        document.getElementById('alertKakao').style.display = "block";
+      }
+    };
 
-    // 빨간색 마커 이미지 (카카오 공식)
+    // 카카오맵 빨간 마커 이미지
     var redMarkerUrl = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
 
     var stores = [
@@ -194,7 +203,7 @@
     var infowindows = [];
 
     function showStores(filteredStores) {
-      // 마커/인포윈도우 삭제
+      // 기존 마커/인포윈도우 삭제
       markers.forEach(function(marker){ marker.setMap(null); });
       infowindows.forEach(function(iw){ iw.close(); });
       markers = [];
@@ -219,7 +228,7 @@
           image: new kakao.maps.MarkerImage(redMarkerUrl, new kakao.maps.Size(32, 35), {offset: new kakao.maps.Point(16, 34)})
         });
         kakao.maps.event.addListener(marker, 'click', function() {
-          infowindows.forEach(function(iw){ iw.close(); }); // 모두 닫고
+          infowindows.forEach(function(iw){ iw.close(); });
           infowindow.open(map, marker);
         });
         markers.push(marker);
@@ -245,14 +254,14 @@
         div.innerHTML = `<b>${store.name}</b><br>${store.address}<br>${store.tel}`;
         div.onclick = function(){
           map.setCenter(new kakao.maps.LatLng(store.lat, store.lng));
-          infowindows.forEach(function(iw){ iw.close(); }); // 모두 닫고
+          infowindows.forEach(function(iw){ iw.close(); });
           infowindows[idx].open(map, markers[idx]);
         };
         resultsDiv.appendChild(div);
       });
     }
 
-    // 검색창 기능
+    // 검색창
     document.getElementById('searchBox').addEventListener('input', function(){
       var keyword = this.value.trim();
       var filtered = [];
@@ -267,21 +276,10 @@
       showStores(filtered);
     });
 
-    // 페이지 처음엔 전체 매장 보여주기
+    // 첫 실행: 전체 매장 보여주기
     showResults(stores);
     showStores(stores);
 
-    // ★★★★★ 쿠팡 광고 가로형 붙이기 ★★★★★
-    window.onload = function() {
-      new PartnersCoupang.G({
-        "id": 887502,
-        "template": "carousel",
-        "trackingCode": "AF1267708",
-        "width": "400",
-        "height": "140",
-        "tsource": ""
-      }).attachTo(document.getElementById("ad-horizontal"));
-    };
   </script>
 </body>
 </html>
