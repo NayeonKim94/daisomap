@@ -24,10 +24,8 @@
     }
     h1 {
       text-align: center;
-      margin: 24px 0 16px 0;
-      font-size: 2.8em;
-      font-weight: bold;
-      letter-spacing: 0.02em;
+      margin: 20px 0 10px 0;
+      font-size: 2em;
     }
     #container {
       max-width: 900px;
@@ -86,34 +84,39 @@
     }
     footer {
       text-align: center;
-      color: #222;
-      margin: 24px 0 12px 0;
-      font-size: 0.74em;
-      line-height: 1.6;
+      color: #888;
+      margin: 30px 0 15px 0;
+      font-size: 0.87em;
+      line-height: 1.8;
       background: none;
-      padding: 0 4vw;
+      padding-left: 8vw;
+      padding-right: 8vw;
     }
-    .adnotice, .copyright {
-      color: #222;
-      font-size: 0.74em;
-      margin-bottom: 1.5px;
+    .adnotice {
+      color: #111;
+      font-size: 0.87em;
+      margin-bottom: 5px;
     }
     .disclaimer {
       color: #DA0037;
-      font-size: 0.74em;
-      margin-bottom: 1.5px;
+      font-size: 0.87em;
+      margin-bottom: 5px;
+    }
+    .copyright {
+      color: #111;
+      font-size: 0.87em;
+      margin-bottom: 5px;
     }
     @media (max-width: 700px) {
-      h1 { font-size: 2em; }
+      h1 { font-size: 1.3em; }
       #container { padding: 3vw; }
       #map { height: 220px; }
       .statcounter { min-height: 18px; }
-      footer, .adnotice, .disclaimer, .copyright { font-size: 0.70em; }
+      footer, .adnotice, .disclaimer, .copyright { font-size: 0.82em; }
     }
   </style>
 </head>
 <body>
-  <!-- ⚠️ 카카오톡 안내문구 -->
   <div class="notice-kakao">
     ⚠️ 카카오톡에서는 지도가 보이지 않을 수 있습니다. 오른쪽 위 <b>⋮</b> 메뉴 또는 하단 <b>↑</b> 메뉴에서 <b>Safari/Chrome으로 열기</b>를 선택해 주세요.
   </div>
@@ -123,7 +126,6 @@
     <div id="results"></div>
     <div id="map"></div>
   </div>
-
   <!-- Statcounter 방문자수 카운터 -->
   <script type="text/javascript">
     var sc_project=13149890; 
@@ -140,7 +142,6 @@
         referrerPolicy="no-referrer-when-downgrade"></a>
     </div>
   </noscript>
-
   <footer>
     <div class="adnotice">
       이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
@@ -155,33 +156,24 @@
   <!-- 카카오맵 JS -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32b4338378d7c102f93e7548e7db28e4"></script>
   <script>
-    // 저작권 연도 자동 입력
-    document.querySelector('.copyright').innerHTML =
-      "© " + new Date().getFullYear() + " 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: nayeonkim8294@gmail.com";
-
     // 빨간색 마커 이미지 (카카오 공식)
     var redMarkerUrl = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
-
     var stores = [
       {name: "다이소 경주점", lat: 35.8562, lng: 129.2247, address: "경북 경주시 원화로 295", tel: "054-000-0000"},
       {name: "다이소 경주터미널점", lat: 35.8434, lng: 129.2033, address: "경북 경주시 구황로 36", tel: "054-111-2222"},
       {name: "다이소 서울점", lat: 37.5665, lng: 126.9780, address: "서울특별시 중구 세종대로 110", tel: "02-333-4444"},
       {name: "다이소 부산점", lat: 35.1796, lng: 129.0756, address: "부산광역시 중구 중앙대로 26", tel: "051-555-6666"}
     ];
-
     var mapContainer = document.getElementById('map'),
         mapOption = {center: new kakao.maps.LatLng(36.5, 127.9), level: 7};
     var map = new kakao.maps.Map(mapContainer, mapOption);
-
     var markers = [];
     var infowindows = [];
-
     function showStores(filteredStores) {
       markers.forEach(function(marker){ marker.setMap(null); });
       infowindows.forEach(function(iw){ iw.close(); });
       markers = [];
       infowindows = [];
-
       filteredStores.forEach(function(store, idx){
         var infowindow = new kakao.maps.InfoWindow({
           content:
@@ -201,19 +193,16 @@
           image: new kakao.maps.MarkerImage(redMarkerUrl, new kakao.maps.Size(32, 35), {offset: new kakao.maps.Point(16, 34)})
         });
         kakao.maps.event.addListener(marker, 'click', function() {
-          infowindows.forEach(function(iw){ iw.close(); }); // 모두 닫고
+          infowindows.forEach(function(iw){ iw.close(); });
           infowindow.open(map, marker);
         });
         markers.push(marker);
         infowindows.push(infowindow);
       });
-
-      // 매장 있으면 첫 매장 위치로 지도 이동
       if (filteredStores.length > 0) {
         map.setCenter(new kakao.maps.LatLng(filteredStores[0].lat, filteredStores[0].lng));
       }
     }
-
     function showResults(filteredStores) {
       var resultsDiv = document.getElementById('results');
       resultsDiv.innerHTML = "";
@@ -227,14 +216,12 @@
         div.innerHTML = `<b>${store.name}</b><br>${store.address}<br>${store.tel}`;
         div.onclick = function(){
           map.setCenter(new kakao.maps.LatLng(store.lat, store.lng));
-          infowindows.forEach(function(iw){ iw.close(); }); // 모두 닫고
+          infowindows.forEach(function(iw){ iw.close(); });
           infowindows[idx].open(map, markers[idx]);
         };
         resultsDiv.appendChild(div);
       });
     }
-
-    // 검색창 기능
     document.getElementById('searchBox').addEventListener('input', function(){
       var keyword = this.value.trim();
       var filtered = [];
@@ -248,8 +235,6 @@
       showResults(filtered);
       showStores(filtered);
     });
-
-    // 처음에 전체 매장 보여주기
     showResults(stores);
     showStores(stores);
   </script>
