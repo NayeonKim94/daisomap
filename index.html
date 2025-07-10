@@ -18,6 +18,13 @@
       margin: auto;
       padding: 10px;
     }
+    h1 {
+      text-align: center;
+      font-size: 1.18em;
+      margin: 22px 0 12px 0;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
     #searchBox {
       margin-bottom: 12px;
       width: 100%;
@@ -94,7 +101,7 @@
     @media (max-width: 700px) {
       #container { max-width: 99vw; padding: 3vw;}
       #map { min-height: 210px; }
-      h1 { font-size: 1.18em; }
+      h1 { font-size: 1em; }
       #searchBox { font-size:1em; }
       .store-item { font-size: 0.96em; }
       .notice-area { font-size: 0.67em; }
@@ -104,11 +111,11 @@
 </head>
 <body>
   <div id="container">
-    <h1 style="text-align:center; font-size:2em; margin:22px 0 12px 0; font-weight:700;">
+    <h1>
       🟥2025 다이소 가맹점 지도🟥
     </h1>
     <div class="alert-kakaotalk" id="alertKakao">
-      카카오톡에서는 지도가 보이지 않을 수 있습니다.<br>
+      ⚠️ 카카오톡에서는 지도가 보이지 않을 수 있습니다.<br>
       오른쪽 위 <b>⋮</b> 메뉴 또는 하단 <b>↑</b> 메뉴에서 <b>Safari/Chrome으로 열기</b>를 선택해 주세요.
     </div>
     <input type="text" id="searchBox" placeholder="지역명으로 검색 (예: 경주)">
