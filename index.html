@@ -5,6 +5,7 @@
   <title>2025 다이소 가맹점 지도</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="2025 다이소 가맹점 지도, 경주, 서울, 부산 등 비공식 매장 정보. 카카오맵 기반 지도 & 실시간 방문자수 카운트.">
+  <!-- 카카오맵 JS -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32b4338378d7c102f93e7548e7db28e4"></script>
   <style>
     body {
@@ -16,6 +17,7 @@
       max-width: 900px;
       margin: 0 auto;
       padding: 0 8px;
+      position: relative;
     }
     .title-main {
       margin: 30px 0 16px 0;
@@ -24,7 +26,6 @@
       font-weight: bold;
       letter-spacing: 0.03em;
     }
-    /* 안내문구(카카오톡) + 하단 안내문구 3개 모두 동일한 크기 */
     .notice-tiny {
       font-size: 0.74em;
     }
@@ -80,19 +81,37 @@
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      margin-bottom: 36px;
+      margin-bottom: 18px;
+    }
+    /* 쿠팡 배너 스타일 */
+    .coupang-banner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    /* 방문자수 카운터 - 지도 바로 아래 고정, container 기준 */
+    #hit-counter-badge {
+      position: absolute;
+      right: 12px;
+      bottom: 30px;
+      z-index: 2000;
+      background: none;
+      border-radius: 8px;
+      padding: 0;
+      box-shadow: none;
     }
     @media (max-width: 800px) {
       .container { max-width: 99vw; padding: 2vw; }
       .title-main { font-size: 1.2em; }
       #map { height: 260px; }
       #notice-kakaotalk { font-size: 0.72em; padding: 9px 7px 8px 7px; }
+      #hit-counter-badge { right: 4vw; bottom: 16px;}
     }
-    /* 하단 안내문구 스타일 (글씨 모두 .notice-tiny 적용) */
     .footer-box {
       text-align: center;
       margin: 25px 0 8px 0;
-      padding: 0 7vw;
+      padding: 0 2vw;
       line-height: 1.6;
     }
     .footer-coupang,
@@ -104,20 +123,9 @@
       word-break: keep-all;
     }
     .footer-disclaimer { color: #d3153a; }
-    /* 방문자수 카운터 위치 고정 */
-    #hit-counter-badge {
-      position: fixed;
-      right: 16px;
-      bottom: 18px;
-      z-index: 5000;
-      background: none;
-      border-radius: 8px;
-      padding: 0;
-      box-shadow: none;
-    }
     @media (max-width: 500px) {
-      #hit-counter-badge { right: 7px; bottom: 10px;}
-      .footer-box { padding: 0 2vw;}
+      .footer-box { padding: 0 1vw;}
+      #hit-counter-badge { right: 2vw; bottom: 8px;}
     }
   </style>
 </head>
@@ -128,20 +136,32 @@
     </div>
     <div id="notice-kakaotalk" class="notice-tiny">
       ⚠️ 카카오톡에서는 지도가 보이지 않을 수 있습니다.<br>
-      오른쪽 위 <b>⋮</b> 버튼 또는, 하단 <b>↑</b> 버튼에서<br>
-      <b>Safari/Chrome으로 열기</b>를 선택해 주세요!
+      오른쪽 위 <b>⋮</b> 버튼 또는, 하단 <b>↑</b> 버튼에서 Safari/Chrome으로 열기를 선택해 주세요!
     </div>
     <input type="text" id="searchBox" placeholder="지역명으로 검색 (예: 경주)">
     <div id="results"></div>
     <div id="map"></div>
-  </div>
-
-  <!-- 방문자수 카운터(고정) -->
-  <div id="hit-counter-badge">
-    <a href="https://hits.sh/nayeonkim94.github.io/daisomap/" target="_blank" rel="noopener">
-      <img alt="Hits"
-           src="https://hits.sh/nayeonkim94.github.io/daisomap.svg?view=today-total&style=flat-square&label=visitors&extraCount=1000&color=ffffff&labelColor=ffffff"/>
-    </a>
+    <!-- 쿠팡 가로형 광고 (지도 아래) -->
+    <div class="coupang-banner">
+      <script src="https://ads-partners.coupang.com/g.js"></script>
+      <script>
+        new PartnersCoupang.G({
+          "id":887502,
+          "template":"carousel",
+          "trackingCode":"AF1267708",
+          "width":"340",
+          "height":"140",
+          "tsource":""
+        });
+      </script>
+    </div>
+    <!-- 방문자수 카운터 (지도아래 오른쪽) -->
+    <div id="hit-counter-badge">
+      <a href="https://hits.sh/nayeonkim94.github.io/daisomap/" target="_blank" rel="noopener">
+        <img alt="Hits"
+             src="https://hits.sh/nayeonkim94.github.io/daisomap.svg?view=today-total&style=flat-square&label=visitors&extraCount=1000&color=ffffff&labelColor=ffffff"/>
+      </a>
+    </div>
   </div>
 
   <!-- 하단 안내문구 (가장 작은 글씨 크기로 통일) -->
