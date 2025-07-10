@@ -101,20 +101,26 @@
       #searchBox { font-size:1em; }
       .store-item { font-size: 0.98em; }
     }
+    /* 안내문구 크기 대폭 축소! */
     .kakao-alert {
       display: none;
       max-width: 440px;
       margin: 0 auto 14px auto;
-      padding: 11px 18px 10px 18px;
+      padding: 9px 15px 8px 15px;
       border-radius: 11px;
       background: #fff0f2;
       color: #c42525;
-      font-size: 1em;
+      font-size: 0.70em;   /* 매우 작게 */
       font-weight: 500;
       text-align: center;
       box-shadow: 0 2px 10px 0 rgba(255, 74, 88, 0.08);
       line-height: 1.7;
       letter-spacing: 0.01em;
+    }
+    /* 하단 안내문구 좌우 공백 넓게! */
+    .footer-padding {
+      padding-left: 12vw;
+      padding-right: 12vw;
     }
     .footer-text {
       text-align: center;
@@ -152,7 +158,8 @@
     </a>
   </div>
 
-  <footer>
+  <!-- 하단 안내문구 padding 클래스 추가 -->
+  <footer class="footer-padding">
     <div class="footer-text">
       이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.<br>
     </div>
@@ -176,81 +183,80 @@
       if(isKakaoInApp()) {
         document.getElementById("kakaoAlert").style.display = "block";
       }
+      // 지도 초기화
+      var stores = [
+        {name: "다이소 경주점", lat: 35.8562, lng: 129.2247, address: "경북 경주시 원화로 295", tel: "054-000-0000"},
+        {name: "다이소 경주터미널점", lat: 35.8434, lng: 129.2033, address: "경북 경주시 구황로 36", tel: "054-111-2222"},
+        {name: "다이소 서울점", lat: 37.5665, lng: 126.9780, address: "서울특별시 중구 세종대로 110", tel: "02-333-4444"},
+        {name: "다이소 부산점", lat: 35.1796, lng: 129.0756, address: "부산광역시 중구 중앙대로 26", tel: "051-555-6666"}
+      ];
+      var mapContainer = document.getElementById('map'),
+          mapOption = {center: new kakao.maps.LatLng(36.5, 127.9), level: 7};
+      var map = new kakao.maps.Map(mapContainer, mapOption);
+      var markers = [], infowindows = [];
+      function showStores(filteredStores) {
+        markers.forEach(marker => marker.setMap(null));
+        infowindows.forEach(iw => iw.close());
+        markers = []; infowindows = [];
+        filteredStores.forEach(function(store, idx){
+          var infowindow = new kakao.maps.InfoWindow({
+            content: `<div style="max-width:350px; min-width:120px; width:auto;
+              word-break:keep-all; white-space:normal;
+              font-size:15px; line-height:1.7; padding:12px 15px;
+              font-family:'Malgun Gothic',Arial,sans-serif;
+              box-sizing:border-box; border-radius:7px;">
+              <b style="font-size:16px; display:block; margin-bottom:6px;">${store.name}</b>
+              <span style="font-size:14px;">${store.address}</span><br>
+              <span style="font-size:14px;">${store.tel}</span>
+              </div>`
+          });
+          var marker = new kakao.maps.Marker({
+            map: map,
+            position: new kakao.maps.LatLng(store.lat, store.lng)
+          });
+          kakao.maps.event.addListener(marker, 'click', function() {
+            infowindows.forEach(iw=>iw.close());
+            infowindow.open(map, marker);
+          });
+          markers.push(marker);
+          infowindows.push(infowindow);
+        });
+        if (filteredStores.length > 0) {
+          map.setCenter(new kakao.maps.LatLng(filteredStores[0].lat, filteredStores[0].lng));
+        }
+      }
+      function showResults(filteredStores) {
+        var resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = "";
+        if (filteredStores.length === 0) {
+          resultsDiv.innerHTML = '<div class="no-result">해당 지역은 다이소 가맹점이 없습니다</div>';
+          return;
+        }
+        filteredStores.forEach(function(store, idx){
+          var div = document.createElement('div');
+          div.className = 'store-item';
+          div.innerHTML = `<b>${store.name}</b><br>${store.address}<br>${store.tel}`;
+          div.onclick = function(){
+            map.setCenter(new kakao.maps.LatLng(store.lat, store.lng));
+            infowindows.forEach(iw=>iw.close());
+            infowindows[idx].open(map, markers[idx]);
+          };
+          resultsDiv.appendChild(div);
+        });
+      }
+      document.getElementById('searchBox').addEventListener('input', function(){
+        var keyword = this.value.trim();
+        var filtered = [];
+        if (keyword === "") filtered = stores;
+        else filtered = stores.filter(function(store){
+          return store.name.includes(keyword) || store.address.includes(keyword);
+        });
+        showResults(filtered);
+        showStores(filtered);
+      });
+      showResults(stores);
+      showStores(stores);
     };
-
-    // 매장 데이터 및 지도 표시(예시)
-    var stores = [
-      {name: "다이소 경주점", lat: 35.8562, lng: 129.2247, address: "경북 경주시 원화로 295", tel: "054-000-0000"},
-      {name: "다이소 경주터미널점", lat: 35.8434, lng: 129.2033, address: "경북 경주시 구황로 36", tel: "054-111-2222"},
-      {name: "다이소 서울점", lat: 37.5665, lng: 126.9780, address: "서울특별시 중구 세종대로 110", tel: "02-333-4444"},
-      {name: "다이소 부산점", lat: 35.1796, lng: 129.0756, address: "부산광역시 중구 중앙대로 26", tel: "051-555-6666"}
-    ];
-    var mapContainer = document.getElementById('map'),
-        mapOption = {center: new kakao.maps.LatLng(36.5, 127.9), level: 7};
-    var map = new kakao.maps.Map(mapContainer, mapOption);
-    var markers = [], infowindows = [];
-    function showStores(filteredStores) {
-      markers.forEach(marker => marker.setMap(null));
-      infowindows.forEach(iw => iw.close());
-      markers = []; infowindows = [];
-      filteredStores.forEach(function(store, idx){
-        var infowindow = new kakao.maps.InfoWindow({
-          content: `<div style="max-width:350px; min-width:120px; width:auto;
-            word-break:keep-all; white-space:normal;
-            font-size:15px; line-height:1.7; padding:12px 15px;
-            font-family:'Malgun Gothic',Arial,sans-serif;
-            box-sizing:border-box; border-radius:7px;">
-            <b style="font-size:16px; display:block; margin-bottom:6px;">${store.name}</b>
-            <span style="font-size:14px;">${store.address}</span><br>
-            <span style="font-size:14px;">${store.tel}</span>
-            </div>`
-        });
-        var marker = new kakao.maps.Marker({
-          map: map,
-          position: new kakao.maps.LatLng(store.lat, store.lng)
-        });
-        kakao.maps.event.addListener(marker, 'click', function() {
-          infowindows.forEach(iw=>iw.close());
-          infowindow.open(map, marker);
-        });
-        markers.push(marker);
-        infowindows.push(infowindow);
-      });
-      if (filteredStores.length > 0) {
-        map.setCenter(new kakao.maps.LatLng(filteredStores[0].lat, filteredStores[0].lng));
-      }
-    }
-    function showResults(filteredStores) {
-      var resultsDiv = document.getElementById('results');
-      resultsDiv.innerHTML = "";
-      if (filteredStores.length === 0) {
-        resultsDiv.innerHTML = '<div class="no-result">해당 지역은 다이소 가맹점이 없습니다</div>';
-        return;
-      }
-      filteredStores.forEach(function(store, idx){
-        var div = document.createElement('div');
-        div.className = 'store-item';
-        div.innerHTML = `<b>${store.name}</b><br>${store.address}<br>${store.tel}`;
-        div.onclick = function(){
-          map.setCenter(new kakao.maps.LatLng(store.lat, store.lng));
-          infowindows.forEach(iw=>iw.close());
-          infowindows[idx].open(map, markers[idx]);
-        };
-        resultsDiv.appendChild(div);
-      });
-    }
-    document.getElementById('searchBox').addEventListener('input', function(){
-      var keyword = this.value.trim();
-      var filtered = [];
-      if (keyword === "") filtered = stores;
-      else filtered = stores.filter(function(store){
-        return store.name.includes(keyword) || store.address.includes(keyword);
-      });
-      showResults(filtered);
-      showStores(filtered);
-    });
-    showResults(stores);
-    showStores(stores);
   </script>
 </body>
 </html>
