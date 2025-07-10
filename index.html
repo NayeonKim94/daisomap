@@ -1,38 +1,21 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
   <meta charset="utf-8">
-  <title>2025 다이소 가맹점 지도 (비공식)</title>
+  <title>🟥 2025 다이소 가맹점 지도 🟥</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-site-verification" content="WnF2ei0gbsnq-e36FIffn4uhUWwkS6yNiJsrByOPc3Q" />
-  <meta name="naver-site-verification" content="bc03a3756485fc617c2a7704a949f03e25983825" />
   <style>
     body {
       font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', Arial, sans-serif;
       margin: 0; padding: 0;
       background: #fafafd;
     }
-    .title-main {
-      font-size: 3.5em;
+    .main-title {
+      font-size: 2.2em;
       text-align: center;
+      margin: 36px 0 18px 0;
       font-weight: bold;
-      margin-top: 25px;
-      margin-bottom: 14px;
-      letter-spacing: 0.01em;
-    }
-    .kakao-guide {
-      display: none;
-      max-width: 420px;
-      margin: 0 auto 20px auto;
-      background: #fff8f1;
-      color: #d04911;
-      font-size: 0.7em;
-      border-radius: 16px;
-      padding: 13px 18px 10px 18px;
-      text-align: center;
-      word-break: keep-all;
-      box-shadow: 0 1px 4px rgba(170,100,0,0.09);
-      line-height: 1.6;
+      letter-spacing: 0.03em;
     }
     #container {
       max-width: 900px;
@@ -76,148 +59,126 @@
     }
     #map-ad-wrap {
       display: flex;
-      flex-direction: column;
-      gap: 0;
+      gap: 18px;
       margin-bottom: 20px;
-      align-items: stretch;
-      position: relative;
+      align-items: flex-start;
     }
     #map {
+      flex: 1 1 0;
       min-width: 0;
       height: 400px;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.07);
       background: #fff;
       position: relative;
-      z-index: 1;
     }
-    /* 지도 바깥 오른쪽 아래 Today 카운터 */
-    .counter-float {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      margin-top: 4px;
-      margin-bottom: 0;
-      font-size: 1em;
-      font-family: 'Malgun Gothic', Arial, sans-serif;
-      font-weight: 600;
-      color: #1a1a1a;
-      min-width: 70px;
-      width: 100%;
-    }
-    .counter-float span {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: rgba(255,255,255,0.96);
-      border-radius: 17px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
-      padding: 4px 14px 4px 14px;
-      font-size: 1em;
-      font-weight: 600;
-      color: #1a1a1a;
-    }
-    .counter-float img {
-      height: 1em;
-      width: auto;
-      vertical-align: middle;
-      filter: grayscale(30%);
+    /* hits.sh 카운터 오른쪽 아래 고정 */
+    #hit-counter-badge {
+      position: fixed;
+      right: 34px;
+      bottom: 34px;
+      z-index: 9999;
+      background: none;
+      border-radius: 8px;
+      padding: 0;
+      box-shadow: none;
     }
     @media (max-width: 1000px) {
-      .title-main { font-size: 2.2em; }
       #container { max-width: 99vw; padding: 3vw;}
+      #map-ad-wrap { gap:10px;}
       #map { height:240px;}
-      .counter-float span { font-size:0.97em; padding:3px 10px; }
+      #hit-counter-badge { right: 10px; bottom: 14px; }
     }
     @media (max-width: 700px) {
-      .title-main { font-size: 1.3em; }
-      .kakao-guide { font-size: 0.62em; padding: 9px 9px 8px 9px; }
-      #map { height: 220px; }
+      #map-ad-wrap {
+        flex-direction: column;
+        gap: 10px;
+      }
+      #map {
+        height: 200px;
+      }
+      .main-title { font-size: 1.3em; }
       #searchBox { font-size:1em; }
       .store-item { font-size: 0.98em; }
-      .disclaimer, .adnotice, .copyright { font-size: 0.72em; }
-      footer { font-size: 0.72em; line-height: 1.6; }
-      .counter-float span { font-size:0.87em; min-width: 50px; }
     }
-    footer {
+    .kakao-alert {
+      display: none;
+      max-width: 440px;
+      margin: 0 auto 14px auto;
+      padding: 11px 18px 10px 18px;
+      border-radius: 11px;
+      background: #fff0f2;
+      color: #c42525;
+      font-size: 1em;
+      font-weight: 500;
       text-align: center;
-      color: #222;
-      margin: 30px 0 15px 0;
-      font-size: 0.89em;
+      box-shadow: 0 2px 10px 0 rgba(255, 74, 88, 0.08);
       line-height: 1.7;
-      background: none;
-      padding-left: 2vw;
-      padding-right: 2vw;
-    }
-    .adnotice, .copyright {
-      color: #111;
-      font-size: 0.78em;
-      margin-bottom: 1px;
-      margin-top: 1px;
       letter-spacing: 0.01em;
     }
-    .disclaimer {
+    .footer-text {
+      text-align: center;
+      color: #000;
+      font-size: 0.78em;
+      margin: 28px 0 6px 0;
+      line-height: 1.8;
+    }
+    .footer-warning {
       color: #DA0037;
       font-size: 0.78em;
-      margin-bottom: 1px;
-      margin-top: 1px;
-      letter-spacing: 0.01em;
+      line-height: 1.8;
+      margin: 0;
     }
   </style>
 </head>
 <body>
+  <div class="main-title">🟥 2025 다이소 가맹점 지도 🟥</div>
+  <div id="kakaoAlert" class="kakao-alert">
+    ⚠️ 카카오톡에서는 지도가 보이지 않을 수 있습니다.<br>
+    오른쪽 위 ⋮ 버튼 또는, 하단 ↑ 버튼에서 Safari/Chrome으로 열기를 선택해 주세요!
+  </div>
   <div id="container">
-    <div class="title-main">🟥 2025 다이소 가맹점 지도 🟥</div>
-    <div id="kakaoNotice" class="kakao-guide">
-      ⚠️ 카카오톡에서는 지도가 보이지 않을 수 있습니다.<br>
-      오른쪽 위 <b>⋮</b> 버튼 또는, 하단 <b>↑</b> 버튼에서 <b>Safari/Chrome으로 열기</b>를 선택해 주세요!
-    </div>
     <input type="text" id="searchBox" placeholder="지역명으로 검색 (예: 경주)">
     <div id="results"></div>
     <div id="map-ad-wrap">
       <div id="map"></div>
-      <div class="counter-float">
-        <span>
-          Today
-          <a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank" style="display:inline;">
-            <img class="statcounter" src="https://c.statcounter.com/13149890/0/a878f572/0/" alt="Web Analytics Made Easy - Statcounter" referrerPolicy="no-referrer-when-downgrade">
-          </a>
-        </span>
-      </div>
     </div>
   </div>
+
+  <!-- hits.sh 카운터 지도 바깥 오른쪽 아래 고정 뱃지 (label=visitors) -->
+  <div id="hit-counter-badge">
+    <a href="https://hits.sh/nayeonkim94.github.io/daisomap/" target="_blank" rel="noopener">
+      <img alt="Hits" src="https://hits.sh/nayeonkim94.github.io/daisomap.svg?view=today-total&style=flat-square&label=visitors&extraCount=1000&color=ffffff&labelColor=ffffff"/>
+    </a>
+  </div>
+
   <footer>
-    <div class="adnotice">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</div>
-    <div class="disclaimer">※ 본 사이트는 다이소 및 아성다이소와 무관한 비공식 서비스입니다. 매장 정보의 정확성은 보장되지 않을 수 있으며, 공식 정보는 다이소 홈페이지를 참고해주세요.</div>
-    <div class="copyright">© <span id="year"></span> 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: nayeonkim8294@gmail.com</div>
-  </footer>
-  <!-- Statcounter JS (방문자 카운터) -->
-  <script type="text/javascript">
-    var sc_project=13149890; 
-    var sc_invisible=0; 
-    var sc_security="a878f572"; 
-    var scJsHost = "https://";
-    document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+"statcounter.com/counter/counter.js'></"+"script>");
-  </script>
-  <noscript>
-    <div class="statcounter">
-      <a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank">
-        <img class="statcounter" src="https://c.statcounter.com/13149890/0/a878f572/0/" alt="Web Analytics Made Easy - Statcounter" referrerPolicy="no-referrer-when-downgrade">
-      </a>
+    <div class="footer-text">
+      이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.<br>
     </div>
-  </noscript>
-  <!-- 카카오맵 JS - https 강제 -->
-  <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=32b4338378d7c102f93e7548e7db28e4"></script>
+    <div class="footer-warning">
+      ※ 본 사이트는 다이소 및 아성다이소와 무관한 비공식 서비스입니다. 매장 정보의 정확성은 보장되지 않을 수 있으며, 공식 정보는 다이소 홈페이지를 참고해주세요.<br>
+    </div>
+    <div class="footer-text">
+      © 2025 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: nayeonkim8294@gmail.com
+    </div>
+  </footer>
+
+  <!-- 카카오맵 -->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32b4338378d7c102f93e7548e7db28e4"></script>
   <script>
-    document.getElementById('year').innerText = new Date().getFullYear();
-    // 카카오톡 앱 감지해서 안내문구 노출
-    function isKakaoApp() {
+    // 카카오톡 in-app 브라우저 감지해서 안내문구 노출
+    function isKakaoInApp() {
       var ua = navigator.userAgent.toLowerCase();
-      return ua.indexOf('kakaotalk') > -1;
+      return ua.indexOf('kakaotalk') !== -1;
     }
-    if (isKakaoApp()) {
-      document.getElementById('kakaoNotice').style.display = 'block';
-    }
+    window.onload = function() {
+      if(isKakaoInApp()) {
+        document.getElementById("kakaoAlert").style.display = "block";
+      }
+    };
+
+    // 매장 데이터 및 지도 표시(예시)
     var stores = [
       {name: "다이소 경주점", lat: 35.8562, lng: 129.2247, address: "경북 경주시 원화로 295", tel: "054-000-0000"},
       {name: "다이소 경주터미널점", lat: 35.8434, lng: 129.2033, address: "경북 경주시 구황로 36", tel: "054-111-2222"},
@@ -227,33 +188,29 @@
     var mapContainer = document.getElementById('map'),
         mapOption = {center: new kakao.maps.LatLng(36.5, 127.9), level: 7};
     var map = new kakao.maps.Map(mapContainer, mapOption);
-    var redMarkerUrl = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
     var markers = [], infowindows = [];
     function showStores(filteredStores) {
-      markers.forEach(function(marker){ marker.setMap(null); });
-      infowindows.forEach(function(iw){ iw.close(); });
-      markers = [];
-      infowindows = [];
+      markers.forEach(marker => marker.setMap(null));
+      infowindows.forEach(iw => iw.close());
+      markers = []; infowindows = [];
       filteredStores.forEach(function(store, idx){
         var infowindow = new kakao.maps.InfoWindow({
-          content:
-            `<div style="max-width:370px; min-width:170px; width:auto;
-                word-break:keep-all; white-space:normal;
-                font-size:15px; line-height:1.7; padding:12px 15px;
-                font-family:'Malgun Gothic',Arial,sans-serif;
-                box-sizing:border-box; border-radius:7px;">
-              <b style="font-size:16px; display:block; margin-bottom:6px;">${store.name}</b>
-              <span style="font-size:14px;">${store.address}</span><br>
-              <span style="font-size:14px;">${store.tel}</span>
+          content: `<div style="max-width:350px; min-width:120px; width:auto;
+            word-break:keep-all; white-space:normal;
+            font-size:15px; line-height:1.7; padding:12px 15px;
+            font-family:'Malgun Gothic',Arial,sans-serif;
+            box-sizing:border-box; border-radius:7px;">
+            <b style="font-size:16px; display:block; margin-bottom:6px;">${store.name}</b>
+            <span style="font-size:14px;">${store.address}</span><br>
+            <span style="font-size:14px;">${store.tel}</span>
             </div>`
         });
         var marker = new kakao.maps.Marker({
           map: map,
-          position: new kakao.maps.LatLng(store.lat, store.lng),
-          image: new kakao.maps.MarkerImage(redMarkerUrl, new kakao.maps.Size(32, 35), {offset: new kakao.maps.Point(16, 34)})
+          position: new kakao.maps.LatLng(store.lat, store.lng)
         });
         kakao.maps.event.addListener(marker, 'click', function() {
-          infowindows.forEach(function(iw){ iw.close(); });
+          infowindows.forEach(iw=>iw.close());
           infowindow.open(map, marker);
         });
         markers.push(marker);
@@ -276,7 +233,7 @@
         div.innerHTML = `<b>${store.name}</b><br>${store.address}<br>${store.tel}`;
         div.onclick = function(){
           map.setCenter(new kakao.maps.LatLng(store.lat, store.lng));
-          infowindows.forEach(function(iw){ iw.close(); });
+          infowindows.forEach(iw=>iw.close());
           infowindows[idx].open(map, markers[idx]);
         };
         resultsDiv.appendChild(div);
@@ -285,13 +242,10 @@
     document.getElementById('searchBox').addEventListener('input', function(){
       var keyword = this.value.trim();
       var filtered = [];
-      if (keyword === "") {
-        filtered = stores;
-      } else {
-        filtered = stores.filter(function(store){
-          return store.name.includes(keyword) || store.address.includes(keyword);
-        });
-      }
+      if (keyword === "") filtered = stores;
+      else filtered = stores.filter(function(store){
+        return store.name.includes(keyword) || store.address.includes(keyword);
+      });
       showResults(filtered);
       showStores(filtered);
     });
