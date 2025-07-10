@@ -2,30 +2,37 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>2025 다이소 가맹점 지도 (비공식)</title>
+  <title>2025 다이소 가맹점 지도</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- 네이버/구글 사이트 소유확인용 -->
+  <!-- 구글, 네이버 서치 등록용 -->
   <meta name="google-site-verification" content="WnF2ei0gbsnq-e36FIffn4uhUWwkS6yNiJsrByOPc3Q" />
   <meta name="naver-site-verification" content="bc03a3756485fc617c2a7704a949f03e25983825" />
-  <meta name="description" content="2025년 전국민 소비쿠폰 가맹점 안내, 다이소 가맹점 위치, 주소, 전화번호, 경주·서울 등 지역별 검색 가능한 비공식 지도 서비스.">
-  <meta name="keywords" content="다이소, 가맹점, 지도, 2025, 전국민 소비쿠폰, 경주, 위치, 주소, 쿠폰, 검색, 매장, 다이소가맹점, 비공식">
   <style>
     body {
       font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', Arial, sans-serif;
       margin: 0; padding: 0;
       background: #fafafd;
     }
+    .notice-kakao {
+      display: block;
+      margin: 18px auto 8px auto;
+      text-align: center;
+      color: #e13a3a;
+      font-size: 0.97em;
+      font-weight: bold;
+      max-width: 90vw;
+    }
+    h1 {
+      text-align: center;
+      margin: 24px 0 16px 0;
+      font-size: 2.8em;
+      font-weight: bold;
+      letter-spacing: 0.02em;
+    }
     #container {
       max-width: 900px;
       margin: auto;
       padding: 10px;
-    }
-    h1 {
-      text-align: center;
-      font-size: 1.24em;
-      margin: 22px 0 12px 0;
-      font-weight: 700;
-      letter-spacing: -1px;
     }
     #searchBox {
       margin-bottom: 12px;
@@ -63,113 +70,96 @@
     }
     #map {
       width: 100%;
-      min-height: 340px;
-      max-height: 460px;
+      height: 400px;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.07);
       background: #fff;
-      margin-bottom: 24px;
+      margin-bottom: 10px;
+      min-height: 200px;
     }
-    .alert-kakaotalk {
+    .statcounter {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 18px auto 6px auto;
+      min-height: 26px;
+    }
+    footer {
       text-align: center;
-      background: #fff7ea;
+      color: #222;
+      margin: 24px 0 12px 0;
+      font-size: 0.74em;
+      line-height: 1.6;
+      background: none;
+      padding: 0 4vw;
+    }
+    .adnotice, .copyright {
+      color: #222;
+      font-size: 0.74em;
+      margin-bottom: 1.5px;
+    }
+    .disclaimer {
       color: #DA0037;
-      font-size: 0.78em;
-      font-weight: 500;
-      border-radius: 7px;
-      padding: 10px 3vw;
-      margin: 18px auto 12px auto;
-      max-width: 480px;
-      border: 1.5px solid #f5e1cf;
-      line-height: 1.7;
-      word-break: keep-all;
-      display: none;
-    }
-    .notice-area {
-      text-align: center;
-      font-size: 0.73em;
-      line-height: 1.7;
-      margin: 34px 0 13px 0;
-      letter-spacing: -0.5px;
-    }
-    .notice-coupang, .notice-copyright {
-      color: #111;
-      margin-bottom: 1px;
-    }
-    .notice-unofficial {
-      color: #DA0037;
-      margin-bottom: 1px;
+      font-size: 0.74em;
+      margin-bottom: 1.5px;
     }
     @media (max-width: 700px) {
-      #container { max-width: 99vw; padding: 3vw;}
-      #map { min-height: 210px; }
-      h1 { font-size: 1.08em; }
-      #searchBox { font-size:1em; }
-      .store-item { font-size: 0.96em; }
-      .notice-area { font-size: 0.67em; }
-      .alert-kakaotalk { font-size: 0.61em; }
+      h1 { font-size: 2em; }
+      #container { padding: 3vw; }
+      #map { height: 220px; }
+      .statcounter { min-height: 18px; }
+      footer, .adnotice, .disclaimer, .copyright { font-size: 0.70em; }
     }
   </style>
 </head>
 <body>
+  <!-- ⚠️ 카카오톡 안내문구 -->
+  <div class="notice-kakao">
+    ⚠️ 카카오톡에서는 지도가 보이지 않을 수 있습니다. 오른쪽 위 <b>⋮</b> 메뉴 또는 하단 <b>↑</b> 메뉴에서 <b>Safari/Chrome으로 열기</b>를 선택해 주세요.
+  </div>
+  <h1>🟥 2025 다이소 가맹점 지도 🟥</h1>
   <div id="container">
-    <h1>
-      🟥 2025 다이소 가맹점 지도 🟥
-    </h1>
-    <div class="alert-kakaotalk" id="alertKakao">
-      ⚠️ 카카오톡에서는 지도가 보이지 않을 수 있습니다.<br>
-      오른쪽 위 <b>⋮</b> 메뉴 또는, 하단 <b>↑</b> 메뉴에서 <b>Safari/Chrome으로 열기</b>를 선택해 주세요.
-    </div>
     <input type="text" id="searchBox" placeholder="지역명으로 검색 (예: 경주)">
     <div id="results"></div>
     <div id="map"></div>
   </div>
 
-  <!-- 쿠팡 광고: 원하는 곳에 넣으세요 -->
-  <div style="max-width:900px;margin:24px auto 0 auto;">
-    <script src="https://ads-partners.coupang.com/g.js"></script>
-    <script>
-      new PartnersCoupang.G({
-        "id": 887502,
-        "template": "carousel",
-        "trackingCode": "AF1267708",
-        "width": "400",
-        "height": "140",
-        "tsource": ""
-      });
-    </script>
-  </div>
+  <!-- Statcounter 방문자수 카운터 -->
+  <script type="text/javascript">
+    var sc_project=13149890; 
+    var sc_invisible=0; 
+    var sc_security="a878f572"; 
+    var scJsHost = "https://";
+    document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+
+    "statcounter.com/counter/counter.js'></"+"script>");
+  </script>
+  <noscript>
+    <div class="statcounter">
+      <a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank">
+        <img class="statcounter" src="https://c.statcounter.com/13149890/0/a878f572/0/" alt="Web Analytics Made Easy - Statcounter"
+        referrerPolicy="no-referrer-when-downgrade"></a>
+    </div>
+  </noscript>
 
-  <div class="notice-area">
-    <div class="notice-coupang">
+  <footer>
+    <div class="adnotice">
       이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
     </div>
-    <div class="notice-unofficial">
+    <div class="disclaimer">
       ※ 본 사이트는 다이소 및 아성다이소와 무관한 비공식 서비스입니다. 매장 정보의 정확성은 보장되지 않을 수 있으며, 공식 정보는 다이소 홈페이지를 참고해주세요.
     </div>
-    <div class="notice-copyright">
-      © <span id="year"></span> 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: Nayeon Kim
+    <div class="copyright">
+      © 2025 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: nayeonkim8294@gmail.com
     </div>
-  </div>
-
+  </footer>
   <!-- 카카오맵 JS -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32b4338378d7c102f93e7548e7db28e4"></script>
   <script>
     // 저작권 연도 자동 입력
-    document.getElementById('year').innerText = new Date().getFullYear();
+    document.querySelector('.copyright').innerHTML =
+      "© " + new Date().getFullYear() + " 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: nayeonkim8294@gmail.com";
 
-    // 카톡/인앱 브라우저 감지 안내
-    function isKakaoInApp() {
-      const ua = navigator.userAgent.toLowerCase();
-      return ua.indexOf('kakaotalk') > -1;
-    }
-    window.onload = function() {
-      if(isKakaoInApp()) {
-        document.getElementById('alertKakao').style.display = "block";
-      }
-    };
-
-    // 카카오맵 빨간 마커 이미지
+    // 빨간색 마커 이미지 (카카오 공식)
     var redMarkerUrl = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
 
     var stores = [
@@ -187,7 +177,6 @@
     var infowindows = [];
 
     function showStores(filteredStores) {
-      // 기존 마커/인포윈도우 삭제
       markers.forEach(function(marker){ marker.setMap(null); });
       infowindows.forEach(function(iw){ iw.close(); });
       markers = [];
@@ -212,7 +201,7 @@
           image: new kakao.maps.MarkerImage(redMarkerUrl, new kakao.maps.Size(32, 35), {offset: new kakao.maps.Point(16, 34)})
         });
         kakao.maps.event.addListener(marker, 'click', function() {
-          infowindows.forEach(function(iw){ iw.close(); });
+          infowindows.forEach(function(iw){ iw.close(); }); // 모두 닫고
           infowindow.open(map, marker);
         });
         markers.push(marker);
@@ -238,14 +227,14 @@
         div.innerHTML = `<b>${store.name}</b><br>${store.address}<br>${store.tel}`;
         div.onclick = function(){
           map.setCenter(new kakao.maps.LatLng(store.lat, store.lng));
-          infowindows.forEach(function(iw){ iw.close(); });
+          infowindows.forEach(function(iw){ iw.close(); }); // 모두 닫고
           infowindows[idx].open(map, markers[idx]);
         };
         resultsDiv.appendChild(div);
       });
     }
 
-    // 검색창
+    // 검색창 기능
     document.getElementById('searchBox').addEventListener('input', function(){
       var keyword = this.value.trim();
       var filtered = [];
@@ -260,10 +249,9 @@
       showStores(filtered);
     });
 
-    // 첫 실행: 전체 매장 보여주기
+    // 처음에 전체 매장 보여주기
     showResults(stores);
     showStores(stores);
-
   </script>
 </body>
 </html>
