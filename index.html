@@ -2,8 +2,15 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>2025 다이소 가맹점 지도 (비공식)</title>
+  <title>2025 다이소 가맹점 지도 (비공식) | 전국 다이소 가맹점 위치, 검색</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="전국 다이소 가맹점 지도, 지역별 검색, 주소와 위치 안내 - 다이소, 아성다이소 비공식 정보 서비스">
+  <meta name="keywords" content="다이소, 가맹점, 다이소지도, 다이소 매장, 주소, 위치, 경주, 전국 다이소, 지도, 검색">
+  <meta property="og:title" content="2025 다이소 가맹점 지도 (비공식)">
+  <meta property="og:description" content="전국 다이소 가맹점 위치와 주소, 전화번호, 지도 검색 서비스.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://네-사이트주소">
+  <link rel="icon" href="/favicon.ico">
   <style>
     body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', Arial, sans-serif; margin: 0; padding: 0; background: #fafafd; }
     #inapp-alert {
@@ -43,18 +50,22 @@
     .store-item { padding:12px; border-bottom:1px solid #f0f0f0; cursor:pointer; transition: background 0.15s;}
     .store-item:hover, .store-item:active { background:#ffe4e1; }
     .no-result { color:#E13A3A; padding:16px; text-align:center; }
-    #map { display: block; width: 100%; min-width: 200px; min-height: 320px; height: 400px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); background: #fff; margin-bottom: 20px;}
+    #map { display: block; width: 100%; min-width: 200px; min-height: 320px; height: 400px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); background: #fff; margin-bottom: 18px;}
+    #coupang-ad-horizontal { width: 100%; min-width: 200px; max-width: 900px; margin: 0 auto 18px auto; display: flex; justify-content: center; }
     @media (max-width: 1000px) {
       #container { max-width: 99vw; padding: 3vw;}
       #map { height:240px; min-height:180px;}
+      #coupang-ad-horizontal { max-width: 99vw; }
     }
-    @media (max-width: 700px) {
-      #inapp-alert { font-size:0.97em; padding:12px 2vw 10px 2vw; }
-      h1 { font-size: 1.2em; margin-top: 52px;}
+    @media (max-width: 800px) {
+      h1 { font-size: 1.15em; margin-top: 52px;}
       #map { height: 160px; min-height: 120px;}
       .store-item { font-size: 0.98em; }
       .disclaimer, .adnotice { font-size: 0.82em; }
       footer { font-size: 0.82em; line-height: 1.7; padding-left: 2vw; padding-right: 2vw;}
+    }
+    @media (max-width: 720px) {
+      #coupang-ad-horizontal { max-width: 98vw; min-width:0; }
     }
     footer {
       text-align: center; color: #888; margin: 30px 0 15px 0; font-size: 0.97em; line-height: 1.8; background: none; padding-left: 8vw; padding-right: 8vw;
@@ -77,6 +88,8 @@
     <input type="text" id="searchBox" placeholder="지역명으로 검색 (예: 경주)">
     <div id="results"></div>
     <div id="map"></div>
+    <!-- 쿠팡 파트너스 가로형 광고 영역 -->
+    <div id="coupang-ad-horizontal"></div>
   </div>
   <footer>
     <div class="adnotice">
@@ -87,17 +100,18 @@
     </div>
     © <span id="year"></span> 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: Nayeon Kim
   </footer>
-  <!-- 쿠팡 광고 JS -->
+  <!-- 쿠팡 광고 JS (한번만) -->
   <script src="https://ads-partners.coupang.com/g.js"></script>
   <script>
+    // 가로형 광고 코드
     new PartnersCoupang.G({
-      "id": 887292,
+      "id": 887502,
       "template": "carousel",
       "trackingCode": "AF1267708",
-      "width": "140",
-      "height": "680",
+      "width": "680",
+      "height": "140",
       "tsource": ""
-    });
+    }).attachTo(document.getElementById("coupang-ad-horizontal"));
   </script>
   <!-- 카카오맵 JS -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32b4338378d7c102f93e7548e7db28e4"></script>
