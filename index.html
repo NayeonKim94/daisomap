@@ -17,7 +17,7 @@
     .store-item:hover, .store-item:active { background:#ffe4e1; }
     .no-result { color:#E13A3A; padding:16px; text-align:center; }
     #map { width: 100%; min-width: 0; height: 400px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); background: #fff; margin-bottom: 18px;}
-    #ad-vertical { width: 400px; min-width: 200px; max-width: 400px; height: 140px; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); display: flex; align-items: flex-start; justify-content: center; position: relative; overflow: hidden; margin: 0 auto 15px auto; }
+    #ad-vertical { width: 100%; max-width: 400px; min-width: 200px; height: 140px; margin: 0 auto 18px auto; display: flex; justify-content: center; align-items: center; }
     #pagination { text-align:center; margin-bottom: 15px; }
     .page-btn { display:inline-block; margin:0 4px; font-size:1em; border:none; background:none; cursor:pointer; color:#555; padding:2px 7px; border-radius:4px;}
     .page-btn.active, .page-btn:active { background:#ffe4e1; color:#c00; font-weight:bold;}
@@ -25,10 +25,12 @@
       #map { height: 200px;}
       h1 { font-size: 1.13em; }
       #subtitle { font-size: 0.93em; }
+      #ad-vertical { max-width: 99vw; height: 110px; }
     }
-    footer { text-align: center; color: #111; margin: 25px 4vw 13px 4vw; font-size: 0.61em; line-height: 1.8; background: none; padding-left: 3vw; padding-right: 3vw;}
-    .adnotice { color: #111; margin-bottom: 4px; font-size: inherit;}
-    .disclaimer { color: #DA0037; margin-bottom: 4px; font-size: inherit;}
+    /* 하단 안내문구 최소화 + 좌우 공백 적게 + 중앙정렬 */
+    footer { text-align: center; color: #111; margin: 25px 6vw 13px 6vw; font-size: 0.58em; line-height: 1.7; background: none; padding-left: 2vw; padding-right: 2vw;}
+    .adnotice { color: #111; margin-bottom: 3px; font-size: inherit;}
+    .disclaimer { color: #DA0037; margin-bottom: 3px; font-size: inherit;}
   </style>
 </head>
 <body>
@@ -68,6 +70,7 @@
       if (isKakaoInApp()) {
         document.getElementById('kakao-alert').style.display = 'block';
       }
+      // 쿠팡 광고를 광고 영역(#ad-vertical)에 정확히 attach!
       new PartnersCoupang.G({
         "id": 887502,
         "template": "carousel",
@@ -78,7 +81,7 @@
       }).attachTo(document.getElementById("ad-vertical"));
     };
 
-    // 경북 다이소 가맹점 데이터 (name 가나다 순으로 미리 정렬)
+    // 가맹점 데이터 가나다 순
     var stores = [
       {name: "다이소 경산사동점", address: "경북 경산시 백자로 56", tel: "053-818-6016", lat: 35.81090484, lng: 128.7542483},
       {name: "다이소 경산신대부적점", address: "경북 경산시 압량읍 대학로 367", tel: "053-816-6016", lat: 35.84147958, lng: 128.7603299},
@@ -120,14 +123,14 @@
       {name: "다이소 의성문소점", address: "경북 의성군 의성읍 문소3길 41", tel: "054-833-1156", lat: 36.34967307, lng: 128.695164},
       {name: "다이소 청송진보점", address: "경북 청송군 진보면 진안로 15-10", tel: "054-872-6016", lat: 36.5280924, lng: 129.0433333},
       {name: "다이소 포항우현점", address: "경북 포항시 북구 새천년대로933번길 6", tel: "054-253-5425", lat: 36.05513543, lng: 129.3633568},
-      {name: "다이소 포항효자SK점", address: "경북 포항시 남구 효성로52번길 7", tel: "054-272-0811", lat: 36.00537347, lng: 129.339527},
       {name: "다이소 포항유강점", address: "경북 포항시 남구 연일읍 유강길17번길 3", tel: "054-277-3822", lat: 36.00463619, lng: 129.3188154},
-      {name: "다이소 포항흥해점", address: "경북 포항시 북구 흥해읍 한동로 30-1", tel: "054-253-8484", lat: 36.11068761, lng: 129.3448324}
+      {name: "다이소 포항효자SK점", address: "경북 포항시 남구 효성로52번길 7", tel: "054-272-0811", lat: 36.00537347, lng: 129.339527},
+      {name: "다이소 포항흥해점", address: "경북 포항시 북구 흥해읍 한동로 30-1", tel: "054-253-8484", lat: 36.11068761, lng: 129.3448324},
     ];
 
     // 가나다 정렬 (중복 및 오타 교정 필요시 여기에 수정)
     stores.sort(function(a, b) {
-      return a.name.localeCompare(b.name, 'ko');
+      return a.name.trim().localeCompare(b.name.trim(), 'ko');
     });
 
     var mapContainer = document.getElementById('map');
@@ -148,11 +151,18 @@
       list.forEach(function(store, idx){
         var infowindow = new kakao.maps.InfoWindow({
           content:
-            `<div style="max-width:370px; min-width:170px; width:auto;
-                word-break:keep-all; white-space:normal;
-                font-size:15px; line-height:1.7; padding:12px 15px;
-                font-family:'Malgun Gothic',Arial,sans-serif;
-                box-sizing:border-box; border-radius:7px;">
+            `<div style="
+              display:inline-block;
+              background:#fff;
+              box-shadow:0 2px 8px rgba(0,0,0,0.11);
+              border-radius:13px;
+              border:1px solid #e1e1e1;
+              padding:15px 20px 13px 17px;
+              min-width:160px; max-width:340px;
+              font-size:15px; line-height:1.7;
+              font-family:'Malgun Gothic',Arial,sans-serif;
+              word-break:keep-all; white-space:normal;
+              ">
               <b style="font-size:16px; display:block; margin-bottom:6px;">${store.name}</b>
               <span style="font-size:14px;">${store.address}</span><br>
               <span style="font-size:14px;">${store.tel}</span>
