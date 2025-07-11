@@ -17,17 +17,30 @@
     .store-item:hover, .store-item:active { background:#ffe4e1; }
     .no-result { color:#E13A3A; padding:16px; text-align:center; }
     #map { width: 100%; min-width: 0; height: 400px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); background: #fff; margin-bottom: 18px;}
-    #ad-vertical-wrap { display: flex; justify-content: center; }
-    #ad-vertical { width: 400px; min-width: 200px; max-width: 99vw; height: 140px; margin: 0 auto 18px auto; display: flex; justify-content: center; align-items: center; }
+    #ad-vertical-wrap { display: flex; justify-content: center; margin: 0 0 10px 0;}
+    #ad-vertical { width: 400px; min-width: 200px; max-width: 99vw; height: 140px; display: flex; justify-content: center; align-items: center; }
     #pagination { text-align:center; margin-bottom: 15px; }
     .page-btn { display:inline-block; margin:0 4px; font-size:1em; border:none; background:none; cursor:pointer; color:#555; padding:2px 7px; border-radius:4px;}
     .page-btn.active, .page-btn:active { background:#ffe4e1; color:#c00; font-weight:bold;}
     .page-btn.block { color: #333; font-weight: bold; padding:2px 7px; }
+    .hits-counter {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 999;
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+    }
     @media (max-width: 700px) {
       #map { height: 200px;}
       h1 { font-size: 1.13em; }
       #subtitle { font-size: 0.93em; }
       #ad-vertical { max-width: 99vw; width:99vw; height: 110px;}
+      .hits-counter { right: 7px; bottom: 7px; }
     }
     footer { text-align: center; color: #111; margin: 25px 6vw 13px 6vw; font-size: 0.58em; line-height: 1.7; background: none; padding-left: 2vw; padding-right: 2vw;}
     .adnotice { color: #111; margin-bottom: 3px; font-size: inherit;}
@@ -46,7 +59,9 @@
     <div id="results"></div>
     <div id="pagination"></div>
     <div id="map"></div>
-    <div id="ad-vertical-wrap"><div id="ad-vertical"></div></div>
+    <div id="ad-vertical-wrap">
+      <div id="ad-vertical"></div>
+    </div>
   </div>
   <footer>
     <div class="adnotice">
@@ -57,6 +72,10 @@
     </div>
     © 2025 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: nayeonkim8294@gmail.com
   </footer>
+  <!-- 방문자수(히트카운터) - 지도 바깥 오른쪽 아래 고정 -->
+  <a href="https://hits.sh/nayeonkim94.github.io/daisomap/" target="_blank" class="hits-counter">
+    <img alt="Hits" src="https://hits.sh/nayeonkim94.github.io/daisomap.svg?view=today-total&style=flat-square&label=visitors&extraCount=1000&color=ffffff&labelColor=ffffff"/>
+  </a>
   <!-- 쿠팡 광고 -->
   <script src="https://ads-partners.coupang.com/g.js"></script>
   <!-- 카카오맵 JS -->
@@ -123,31 +142,27 @@
       {name:"다이소 홈플러스경산점",address:"경북 경산시 경안로 288",tel:"053-812-6016",lat:35.83282531,lng:128.7356446},
       {name:"다이소 청송진보점",address:"경북 청송군 진보면 진안로 15-10",tel:"054-872-6016",lat:36.5280924,lng:129.0433333}
     ];
+    stores.sort((a,b)=>a.name.localeCompare(b.name,"ko"));
 
-    stores.sort((a, b) => a.name.localeCompare(b.name, "ko"));
-
-    // 페이지네이션 세팅
+    // 페이지네이션
     const PAGE_SIZE = 5;
-    const PAGE_BLOCK = 5; // 한 번에 보이는 페이지 버튼 개수
-    let currentPage = 1;
+    const PAGE_BLOCK = 5;
     let filteredStores = stores;
+    let currentPage = 1;
 
     function showResults(page=1) {
+      currentPage = page;
+      const start = (page-1)*PAGE_SIZE;
+      const pageStores = filteredStores.slice(start, start+PAGE_SIZE);
       const resultsDiv = document.getElementById('results');
       resultsDiv.innerHTML = "";
-      const start = (page - 1) * PAGE_SIZE;
-      const end = start + PAGE_SIZE;
-      const pageStores = filteredStores.slice(start, end);
-
-      if (pageStores.length === 0) {
-        resultsDiv.innerHTML = '<div class="no-result">해당지역은 아직 등록이 안됐습니다</div>';
+      if(pageStores.length === 0) {
+        resultsDiv.innerHTML = `<div class="no-result">해당지역은 아직 등록이 안됐습니다</div>`;
         document.getElementById('map').style.display = "none";
         return;
-      } else {
-        document.getElementById('map').style.display = "";
       }
-
-      pageStores.forEach(function(store, idx){
+      document.getElementById('map').style.display = "";
+      pageStores.forEach((store,idx)=>{
         const div = document.createElement('div');
         div.className = 'store-item';
         div.innerHTML = `<b>${store.name}</b><br>${store.address}<br>${store.tel}`;
@@ -158,8 +173,7 @@
         };
         resultsDiv.appendChild(div);
       });
-
-      showStores(pageStores);
+      showStores(pageStores, start);
       setPagination(page, Math.ceil(filteredStores.length / PAGE_SIZE));
     }
 
@@ -195,7 +209,7 @@
       }
     }
 
-    // 지도 표시
+    // 지도, 마커, 인포윈도우
     var mapContainer = document.getElementById('map'),
       mapOption = {center: new kakao.maps.LatLng(36.5, 127.9), level: 8};
     var map = new kakao.maps.Map(mapContainer, mapOption);
@@ -203,21 +217,24 @@
     var markers = [];
     var infowindows = [];
 
-    function showStores(pageStores) {
+    function showStores(pageStores, offset) {
       // 마커/인포윈도우 삭제
       markers.forEach(marker=>marker.setMap(null));
       infowindows.forEach(iw=>iw.close());
       markers = [];
       infowindows = [];
-
       pageStores.forEach(function(store, idx){
+        // 완전한 카드형 스퀘어(화살표/테두리 말풍선 없이)
         var infowindow = new kakao.maps.InfoWindow({
           content:
-            `<div style="max-width:360px; min-width:160px; width:auto; word-break:break-all; white-space:normal; font-size:15px; line-height:1.7; padding:12px 15px; font-family:'Malgun Gothic',Arial,sans-serif; box-sizing:border-box; border-radius:7px; background:#fff; border:1.5px solid #e1e1e1;">
+            `<div style="max-width:370px; min-width:160px; width:auto; word-break:break-all; white-space:normal; font-size:15px; line-height:1.7; padding:14px 19px; font-family:'Malgun Gothic',Arial,sans-serif; box-sizing:border-box; border-radius:11px; background:#fff; border:0; box-shadow:0 2px 8px rgba(0,0,0,0.09);">
               <b style="font-size:16px; display:block; margin-bottom:6px;">${store.name}</b>
               <span style="font-size:14px;">${store.address}</span><br>
               <span style="font-size:14px;">${store.tel}</span>
-            </div>`
+            </div>`,
+          removable: false,
+          zIndex: 2,
+          disableAutoPan: false
         });
         var marker = new kakao.maps.Marker({
           map: map,
@@ -232,9 +249,10 @@
         infowindows.push(infowindow);
       });
 
-      // 첫 매장 위치로 지도 이동
+      // 첫 매장 위치로 지도 이동, 첫 마커만 자동으로 오픈
       if (pageStores.length > 0) {
         map.setCenter(new kakao.maps.LatLng(pageStores[0].lat, pageStores[0].lng));
+        infowindows[0].open(map, markers[0]);
       }
     }
 
