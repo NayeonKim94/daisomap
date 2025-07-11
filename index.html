@@ -2,10 +2,9 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <title>2025 다이소 가맹점 지도</title>
+  <title>2025 다이소 가맹점 지도 – 민생회복 소비쿠폰 사용처 안내</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="2025 다이소 가맹점 지도, 경주, 서울, 부산 등 비공식 매장 정보. 카카오맵 기반 지도 & 실시간 방문자수 카운트.">
-  <!-- 구글 서치콘솔 인증 -->
+  <meta name="description" content="2025 민생회복 소비쿠폰 사용가능 다이소 가맹점 지도, 전국 사용처, 주소, 전화번호 한눈에 확인. 직영/가맹점 구분.">
   <meta name="google-site-verification" content="WnF2ei0gbsnq-e36FIffn4uhUWwkS6yNiJsrByOPc3Q" />
   <style>
     body {
@@ -20,11 +19,20 @@
       position: relative;
     }
     .title-main {
-      margin: 30px 0 16px 0;
+      margin: 30px 0 5px 0;
       text-align: center;
       font-size: 2.3em;
       font-weight: bold;
       letter-spacing: 0.03em;
+      line-height: 1.1;
+    }
+    .title-sub {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.13em;
+      color: #da0037;
+      font-weight: 600;
+      letter-spacing: 0.02em;
     }
     .notice-tiny {
       font-size: 0.74em;
@@ -104,6 +112,7 @@
     @media (max-width: 800px) {
       .container { max-width: 99vw; padding: 2vw; }
       .title-main { font-size: 1.2em; }
+      .title-sub { font-size: 1em; }
       #map { height: 260px; }
       #notice-kakaotalk { font-size: 0.72em; padding: 9px 7px 8px 7px; }
       #hit-counter-badge { right: 4vw; bottom: 16px;}
@@ -132,7 +141,10 @@
 <body>
   <div class="container">
     <div class="title-main">
-      🟥&nbsp;2025 다이소 가맹점 지도&nbsp;🟥
+      🟥 2025 다이소 가맹점 지도 🟥
+    </div>
+    <div class="title-sub">
+      민생회복 소비쿠폰 사용처 안내
     </div>
     <div id="notice-kakaotalk" class="notice-tiny">
       ⚠️ 카카오톡에서는 지도가 보이지 않을 수 있습니다.<br>
@@ -177,7 +189,7 @@
     </div>
   </div>
 
-  <!-- 카카오맵 SDK (마지막에! 새 앱키 적용) -->
+  <!-- 카카오맵 SDK -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c335bf7b64cf3ae9c659bde98a24c81"></script>
   <script>
     // --- 카카오톡에서만 안내문구 보이기 ---
@@ -249,7 +261,6 @@
       var resultsDiv = document.getElementById('results');
       resultsDiv.innerHTML = "";
       if (filteredStores.length === 0) {
-        // *** [검색 결과 없음 안내문구]만 교체 ***
         resultsDiv.innerHTML = '<div class="no-result">해당지역은 아직 등록이 안됐습니다</div>';
         return;
       }
