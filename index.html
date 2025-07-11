@@ -1,239 +1,284 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
   <meta charset="utf-8">
-  <title>2025 다이소 가맹점 지도 – 민생회복 소비쿠폰 사용처 안내</title>
+  <title>🟥 2025 다이소 가맹점 지도 🟥</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="2025 민생회복 소비쿠폰 사용가능 다이소 가맹점 지도, 전국 사용처, 주소, 전화번호 한눈에 확인. 직영/가맹점 구분.">
+  <!-- 구글 서치콘솔 -->
   <meta name="google-site-verification" content="WnF2ei0gbsnq-e36FIffn4uhUWwkS6yNiJsrByOPc3Q" />
   <style>
     body {
       font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', Arial, sans-serif;
-      background: #fafafd;
       margin: 0; padding: 0;
+      background: #fafafd;
     }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 8px;
-      position: relative;
-    }
-    .title-main {
-      margin: 30px 0 5px 0;
+    h1 {
       text-align: center;
-      font-size: 2.3em;
-      font-weight: bold;
-      letter-spacing: 0.03em;
-      line-height: 1.1;
+      margin: 26px 0 7px 0;
+      font-size: 2.2em;
     }
-    .title-sub {
+    #subtitle {
       text-align: center;
-      margin-bottom: 20px;
-      font-size: 1.13em;
-      color: #da0037;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-    .notice-tiny {
-      font-size: 0.74em;
-    }
-    #notice-kakaotalk {
-      display: none;
-      margin: 0 auto 14px auto;
-      background: #fff6f0;
-      color: #a53a00;
+      font-size: 1.12em;
+      color: #444;
+      margin-bottom: 10px;
       font-weight: 500;
-      border-radius: 13px;
-      padding: 10px 14px 8px 14px;
+    }
+    #kakao-alert {
+      display: none;
+      max-width: 96vw;
+      margin: 0 auto 10px auto;
+      background: #ffeaea;
+      color: #cf2222;
+      border-radius: 11px;
+      font-size: 0.73em;
+      padding: 8px 11px 8px 10px;
+      line-height: 1.7;
+      word-break: keep-all;
       text-align: center;
-      max-width: 400px;
-      line-height: 1.6;
-      box-sizing: border-box;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      font-weight: 500;
+    }
+    #container {
+      max-width: 900px;
+      margin: auto;
+      padding: 10px;
     }
     #searchBox {
-      display: block;
-      margin: 0 auto 16px auto;
-      padding: 9px 11px;
-      width: 98%;
+      margin-bottom: 12px;
+      width: 100%;
       max-width: 400px;
+      padding: 10px;
+      font-size: 1.1em;
       border: 1px solid #ddd;
-      border-radius: 7px;
-      font-size: 1.07em;
+      border-radius: 8px;
       box-sizing: border-box;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     #results {
-      margin-bottom: 13px;
+      margin-bottom:15px;
       background: #fff;
       border-radius: 8px;
-      font-size: 1em;
       box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      font-size: 1em;
     }
     .store-item {
-      padding: 12px;
-      border-bottom: 1px solid #f0f0f0;
-      cursor: pointer;
+      padding:12px;
+      border-bottom:1px solid #f0f0f0;
+      cursor:pointer;
       transition: background 0.15s;
     }
     .store-item:hover, .store-item:active {
-      background: #ffe4e1;
+      background:#ffe4e1;
     }
     .no-result {
-      color: #E13A3A;
-      padding: 14px 0;
-      text-align: center;
+      color:#E13A3A;
+      padding:16px;
+      text-align:center;
+    }
+    #map-ad-wrap {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 20px;
+      align-items: flex-start;
     }
     #map {
-      width: 100%;
+      flex: 1 1 0;
+      min-width: 0;
       height: 400px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      background: #fff;
+    }
+    #ad-vertical {
+      flex: none;
+      width: 400px;
+      min-width: 200px;
+      max-width: 400px;
+      height: 140px;
       background: #fff;
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      margin-bottom: 18px;
-    }
-    /* 쿠팡 배너 스타일 */
-    .coupang-banner {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
       display: flex;
+      align-items: flex-start;
       justify-content: center;
-      align-items: center;
-      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+      margin-left: 0;
     }
-    /* 방문자수 카운터 - 지도 바로 아래 고정, container 기준 */
-    #hit-counter-badge {
-      position: absolute;
-      right: 12px;
-      bottom: 30px;
-      z-index: 2000;
-      background: none;
-      border-radius: 8px;
-      padding: 0;
-      box-shadow: none;
+    @media (max-width: 1000px) {
+      #container { max-width: 99vw; padding: 3vw;}
+      #map-ad-wrap { gap:10px;}
+      #ad-vertical { width:100vw; min-width:140px; max-width:99vw; height:140px;}
+      #map { height:240px;}
     }
-    @media (max-width: 800px) {
-      .container { max-width: 99vw; padding: 2vw; }
-      .title-main { font-size: 1.2em; }
-      .title-sub { font-size: 1em; }
-      #map { height: 260px; }
-      #notice-kakaotalk { font-size: 0.72em; padding: 9px 7px 8px 7px; }
-      #hit-counter-badge { right: 4vw; bottom: 16px;}
+    @media (max-width: 700px) {
+      #map-ad-wrap {
+        flex-direction: column;
+        gap: 10px;
+      }
+      #ad-vertical {
+        width: 100%;
+        min-width: 0;
+        max-width: 100vw;
+        height: 110px;
+        padding-bottom: 7px;
+      }
+      #map {
+        height: 170px;
+      }
+      h1 { font-size: 1.13em; }
+      #subtitle { font-size: 0.93em; }
+      #searchBox { font-size:1em; }
+      .store-item { font-size: 0.98em; }
     }
-    .footer-box {
+    footer {
       text-align: center;
-      margin: 25px 0 8px 0;
-      padding: 0 2vw;
-      line-height: 1.6;
+      color: #111;
+      margin: 25px 4vw 13px 4vw;
+      font-size: 0.61em;
+      line-height: 1.8;
+      background: none;
+      padding-left: 3vw;
+      padding-right: 3vw;
     }
-    .footer-coupang,
-    .footer-disclaimer,
-    .footer-copyright {
-      font-size: 0.74em;
-      color: #222;
-      margin-bottom: 2px;
-      word-break: keep-all;
+    .adnotice {
+      color: #111;
+      margin-bottom: 4px;
+      font-size: inherit;
     }
-    .footer-disclaimer { color: #d3153a; }
-    @media (max-width: 500px) {
-      .footer-box { padding: 0 1vw;}
-      #hit-counter-badge { right: 2vw; bottom: 8px;}
+    .disclaimer {
+      color: #DA0037;
+      margin-bottom: 4px;
+      font-size: inherit;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="title-main">
-      🟥 2025 다이소 가맹점 지도 🟥
-    </div>
-    <div class="title-sub">
-      민생회복 소비쿠폰 사용처 안내
-    </div>
-    <div id="notice-kakaotalk" class="notice-tiny">
-      ⚠️ 카카오톡에서는 지도가 보이지 않을 수 있습니다.<br>
-      오른쪽 위 <b>⋮</b> 버튼 또는, 하단 <b>↑</b> 버튼에서 Safari/Chrome으로 열어주세요!
-    </div>
+  <div id="kakao-alert">
+    ⚠️ 카카오톡에서는 지도가 보이지 않을 수 있습니다.<br>
+    오른쪽 위 ⋮ 버튼 또는, 하단 ↑ 버튼에서 Safari/Chrome으로 열어주세요!
+  </div>
+  <div id="container">
+    <h1>🟥 2025 다이소 가맹점 지도 🟥</h1>
+    <div id="subtitle">민생회복 소비쿠폰 사용처 안내</div>
     <input type="text" id="searchBox" placeholder="지역명으로 검색 (예: 경주)">
     <div id="results"></div>
-    <div id="map"></div>
-    <!-- 쿠팡 가로형 광고 (지도 아래) -->
-    <div class="coupang-banner">
-      <script src="https://ads-partners.coupang.com/g.js"></script>
-      <script>
-        new PartnersCoupang.G({
-          "id":887502,
-          "template":"carousel",
-          "trackingCode":"AF1267708",
-          "width":"400",
-          "height":"140",
-          "tsource":""
-        });
-      </script>
-    </div>
-    <!-- 방문자수 카운터 (지도아래 오른쪽) -->
-    <div id="hit-counter-badge">
-      <a href="https://hits.sh/nayeonkim94.github.io/daisomap/" target="_blank" rel="noopener">
-        <img alt="Hits"
-             src="https://hits.sh/nayeonkim94.github.io/daisomap.svg?view=today-total&style=flat-square&label=visitors&extraCount=1000&color=ffffff&labelColor=ffffff"/>
-      </a>
+    <div id="map-ad-wrap">
+      <div id="map"></div>
+      <div id="ad-vertical"></div>
     </div>
   </div>
-
-  <!-- 하단 안내문구 (가장 작은 글씨 크기로 통일) -->
-  <div class="footer-box notice-tiny">
-    <div class="footer-coupang">
+  <footer>
+    <div class="adnotice">
       이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
     </div>
-    <div class="footer-disclaimer">
+    <div class="disclaimer">
       ※ 본 사이트는 다이소 및 아성다이소와 무관한 비공식 서비스입니다. 매장 정보의 정확성은 보장되지 않을 수 있으며, 공식 정보는 다이소 홈페이지를 참고해주세요.
     </div>
-    <div class="footer-copyright">
-      © 2025 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: nayeonkim8294@gmail.com
-    </div>
-  </div>
-
-  <!-- 카카오맵 SDK -->
+    © 2025 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: nayeonkim8294@gmail.com
+  </footer>
+  <!-- 쿠팡 광고 JS -->
+  <script src="https://ads-partners.coupang.com/g.js"></script>
+  <!-- 카카오맵 JS -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c335bf7b64cf3ae9c659bde98a24c81"></script>
   <script>
-    // --- 카카오톡에서만 안내문구 보이기 ---
-    function isKakaoTalk() {
-      return /KAKAOTALK/i.test(navigator.userAgent);
+    // 카카오톡 in-app 감지
+    function isKakaoInApp() {
+      const ua = navigator.userAgent.toLowerCase();
+      return ua.includes("kakaotalk");
     }
-    function showKakaoNoticeIfNeeded() {
-      var notice = document.getElementById('notice-kakaotalk');
-      if (isKakaoTalk() && window.innerWidth < 900) {
-        notice.style.display = 'block';
-      } else {
-        notice.style.display = 'none';
+    window.onload = function() {
+      // 카카오톡 in-app 감지 후 안내문구 노출
+      if (isKakaoInApp()) {
+        document.getElementById('kakao-alert').style.display = 'block';
       }
-    }
-    showKakaoNoticeIfNeeded();
-    window.addEventListener('resize', showKakaoNoticeIfNeeded);
+      // 쿠팡 광고
+      new PartnersCoupang.G({
+        "id": 887502,
+        "template": "carousel",
+        "trackingCode": "AF1267708",
+        "width": "400",
+        "height": "140",
+        "tsource": ""
+      }).attachTo(document.getElementById("ad-vertical"));
+    };
 
-    // --- 매장 데이터 및 지도 ---
+    // 다이소 경북 가맹점 데이터
     var stores = [
-      {name: "다이소 경주점", lat: 35.8562, lng: 129.2247, address: "경북 경주시 원화로 295", tel: "054-000-0000"},
-      {name: "다이소 경주터미널점", lat: 35.8434, lng: 129.2033, address: "경북 경주시 구황로 36", tel: "054-111-2222"},
-      {name: "다이소 서울점", lat: 37.5665, lng: 126.9780, address: "서울특별시 중구 세종대로 110", tel: "02-333-4444"},
-      {name: "다이소 부산점", lat: 35.1796, lng: 129.0756, address: "부산광역시 중구 중앙대로 26", tel: "051-555-6666"}
+      {name: "다이소 경주중앙시장점", address: "경북 경주시 화랑로 49", tel: "054-777-5507", lat: 35.8448686, lng: 129.2061446},
+      {name: "다이소 경주황성점", address: "경북 경주시 용담로 88", tel: "054-771-9944", lat: 35.86403815, lng: 129.2121046},
+      {name: "다이소 경주불국사점", address: "경북 경주시 구매두림길 24 해밀튼카운티시래 102동", tel: "054-777-6016", lat: 35.77330097, lng: 129.3056236},
+      {name: "다이소 경주외동점", address: "경북 경주시 외동읍 입실로 4", tel: "054-775-6016", lat: 35.70849095, lng: 129.3257737},
+      {name: "다이소 경주동국대점", address: "경북 경주시 석현로 63-6", tel: "054-741-0005", lat: 35.85981203, lng: 129.1891846},
+      {name: "다이소 경주충효점", address: "경북 경주시 충효녹지길 72", tel: "070-4287-7118", lat: 35.84293816, lng: 129.1832456},
+      {name: "다이소 경주모화점", address: "경북 경주시 외동읍 산업로 1750", tel: "054-771-1101", lat: 35.67094891, lng: 129.3360296},
+      {name: "다이소 경주건천점", address: "경북 경주시 건천읍 내서로 1084", tel: "054-701-2750", lat: 35.85143769, lng: 129.1007029},
+      {name: "다이소 경주안강산대점", address: "경북 경주시 안강읍 안강중앙로 162", tel: "054-763-5222", lat: 35.99301291, lng: 129.2177293},
+      {name: "다이소 포항우현점", address: "경북 포항시 북구 새천년대로933번길 6", tel: "054-253-5425", lat: 36.05513543, lng: 129.3633568},
+      {name: "다이소 포항흥해점", address: "경북 포항시 북구 흥해읍 한동로 30-1", tel: "054-253-8484", lat: 36.11068761, lng: 129.3448324},
+      {name: "다이소 포항효자SK점", address: "경북 포항시 남구 효성로52번길 7", tel: "054-272-0811", lat: 36.00537347, lng: 129.339527},
+      {name: "다이소 포항유강점", address: "경북 포항시 남구 연일읍 유강길17번길 3", tel: "054-277-3822", lat: 36.00463619, lng: 129.3188154},
+      {name: "다이소 구미상모사곡점", address: "경북 구미시 상사서로 94", tel: "054-461-9929", lat: 36.09092664, lng: 128.3555393},
+      {name: "다이소 경북울진점", address: "경북 울진군 울진읍 읍내8길 20", tel: "054-781-6016", lat: 36.99461617, lng: 129.4025065},
+      {name: "다이소 영주점", address: "경북 영주시 중앙로81번길 5 1층", tel: "054-633-7772", lat: 36.82277887, lng: 128.6242675},
+      {name: "다이소 경산진량점", address: "경북 경산시 진량읍 다문로 62", tel: "053-853-6016", lat: 35.87456775, lng: 128.8179938},
+      {name: "다이소 영주가흥점", address: "경북 영주시 대학로 250", tel: "054-635-5885", lat: 36.81786948, lng: 128.604941},
+      {name: "다이소 경북청도점", address: "경북 청도군 청도읍 청화로 145", tel: "054-371-6018", lat: 35.64489998, lng: 128.7420125},
+      {name: "다이소 경주외동점", address: "경북 경주시 외동읍 입실로 4", tel: "054-775-6016", lat: 35.70849095, lng: 129.3257737},
+      {name: "다이소 김천혁신도시점", address: "경북 김천시 혁신3로 17", tel: "054-430-6709", lat: 36.11702869, lng: 128.1834346},
+      {name: "다이소 경북풍기점", address: "경북 영주시 풍기읍 소백로 1892", tel: "054-927-1892", lat: 36.86593252, lng: 128.5357008},
+      {name: "다이소 경산신대부적점", address: "경북 경산시 압량읍 대학로 367", tel: "053-816-6016", lat: 35.84147958, lng: 128.7603299},
+      {name: "다이소 경산사동점", address: "경북 경산시 백자로 56", tel: "053-818-6016", lat: 35.81090484, lng: 128.7542483},
+      {name: "다이소 구미인동점", address: "경북 구미시 인동중앙로10길 24", tel: "054-472-4973", lat: 36.10819241, lng: 128.4251519},
+      {name: "다이소 경북의성점", address: "경북 의성군 의성읍 문소3길 41", tel: "054-833-1156", lat: 36.34967307, lng: 128.695164},
+      {name: "다이소 경북성주점", address: "경북 성주군 성주읍 성주로 3268", tel: "054-933-7957", lat: 35.91764482, lng: 128.2911756},
+      {name: "다이소 구미비산점", address: "경북 구미시 비산로3길 33-23", tel: "054-464-9988", lat: 36.12234827, lng: 128.3746919},
+      {name: "다이소 경북영덕점", address: "경북 영덕군 영덕읍 덕곡길 89-1", tel: "054-733-2600", lat: 36.41169907, lng: 129.3696101},
+      {name: "다이소 울진후포점", address: "경북 울진군 후포면 정실1길 20", tel: "054-788-0333", lat: 36.67594623, lng: 129.4421253},
+      {name: "다이소 청송진보점", address: "경북 청송군 진보면 진안로 15-10", tel: "054-872-6016", lat: 36.5280924, lng: 129.0433333},
+      {name: "다이소 구미오태북삼점", address: "경북 구미시 금오대로 300", tel: "054-463-6016", lat: 36.07126424, lng: 128.3494537},
+      {name: "다이소 경북고령점", address: "경북 고령군 대가야읍 우륵로 18", tel: "054-954-8837", lat: 35.73148218, lng: 128.2695328},
+      {name: "다이소 구미문성지구점", address: "경북 구미시 고아읍 들성로 253", tel: "054-452-4455", lat: 36.16140959, lng: 128.3480243},
+      {name: "다이소 구미봉곡점", address: "경북 구미시 봉곡로 161", tel: "054-455-0425", lat: 36.16140959, lng: 128.3480243},
+      {name: "다이소 경북영양점", address: "경북 영양군 영양읍 동서대로 116", tel: "054-683-3438", lat: 36.66215509, lng: 129.1220551},
+      {name: "다이소 구미원호점", address: "경북 구미시 고아읍 문장로 178", tel: "054-452-1909", lat: 36.14916031, lng: 128.3312047},
+      {name: "다이소 홈플러스경산점", address: "경북 경산시 경안로 288", tel: "053-812-6016", lat: 35.83282531, lng: 128.7356446},
+      {name: "다이소 구미선산점", address: "경북 구미시 선산읍 남문로2길 46", tel: "054-482-0001", lat: 36.24255676, lng: 128.304202},
+      {name: "다이소 김천아포점", address: "경북 김천시 아포읍 아포대로 1050", tel: "054-435-7292", lat: 36.15843351, lng: 128.2440044}
     ];
 
-    // 지도 초기화
+    // 불필요한 앞뒤 공백 자동 제거
+    stores = stores.map(store => ({
+      name: (store.name || '').trim(),
+      address: (store.address || '').trim(),
+      tel: (store.tel || '').trim(),
+      lat: Number(store.lat),
+      lng: Number(store.lng)
+    }));
+
     var mapContainer = document.getElementById('map'),
-        mapOption = {center: new kakao.maps.LatLng(36.5, 127.9), level: 7};
+        mapOption = {center: new kakao.maps.LatLng(36.5, 128.8), level: 9};
     var map = new kakao.maps.Map(mapContainer, mapOption);
 
-    var redMarkerUrl = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
-    var markers = [], infowindows = [];
+    var markers = [];
+    var infowindows = [];
 
     function showStores(filteredStores) {
       markers.forEach(function(marker){ marker.setMap(null); });
       infowindows.forEach(function(iw){ iw.close(); });
-      markers = []; infowindows = [];
+      markers = [];
+      infowindows = [];
 
       filteredStores.forEach(function(store, idx){
         var infowindow = new kakao.maps.InfoWindow({
-          content: `
-            <div style="max-width:370px; min-width:170px; width:auto; word-break:keep-all; white-space:normal;
-                        font-size:15px; line-height:1.7; padding:12px 15px; font-family:'Malgun Gothic',Arial,sans-serif;
-                        box-sizing:border-box; border-radius:7px;">
+          content:
+            `<div style="max-width:370px; min-width:170px; width:auto;
+                word-break:keep-all; white-space:normal;
+                font-size:15px; line-height:1.7; padding:12px 15px;
+                font-family:'Malgun Gothic',Arial,sans-serif;
+                box-sizing:border-box; border-radius:7px;">
               <b style="font-size:16px; display:block; margin-bottom:6px;">${store.name}</b>
               <span style="font-size:14px;">${store.address}</span><br>
               <span style="font-size:14px;">${store.tel}</span>
@@ -241,8 +286,7 @@
         });
         var marker = new kakao.maps.Marker({
           map: map,
-          position: new kakao.maps.LatLng(store.lat, store.lng),
-          image: new kakao.maps.MarkerImage(redMarkerUrl, new kakao.maps.Size(32, 35), {offset: new kakao.maps.Point(16, 34)})
+          position: new kakao.maps.LatLng(store.lat, store.lng)
         });
         kakao.maps.event.addListener(marker, 'click', function() {
           infowindows.forEach(function(iw){ iw.close(); });
@@ -279,14 +323,19 @@
 
     document.getElementById('searchBox').addEventListener('input', function(){
       var keyword = this.value.trim();
-      var filtered = (keyword === "") ? stores :
-        stores.filter(function(store){
+      var filtered = [];
+      if (keyword === "") {
+        filtered = stores;
+      } else {
+        filtered = stores.filter(function(store){
           return store.name.includes(keyword) || store.address.includes(keyword);
         });
+      }
       showResults(filtered);
       showStores(filtered);
     });
 
+    // 처음 전체 매장 표시
     showResults(stores);
     showStores(stores);
   </script>
