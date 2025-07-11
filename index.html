@@ -5,7 +5,8 @@
   <title>2025 다이소 가맹점 지도</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="2025 다이소 가맹점 지도, 경주, 서울, 부산 등 비공식 매장 정보. 카카오맵 기반 지도 & 실시간 방문자수 카운트.">
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32b4338378d7c102f93e7548e7db28e4"></script>
+  <!-- 구글 서치콘솔 인증 -->
+  <meta name="google-site-verification" content="WnF2ei0gbsnq-e36FIffn4uhUWwkS6yNiJsrByOPc3Q" />
   <style>
     body {
       font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', Arial, sans-serif;
@@ -135,7 +136,7 @@
     </div>
     <div id="notice-kakaotalk" class="notice-tiny">
       ⚠️ 카카오톡에서는 지도가 보이지 않을 수 있습니다.<br>
-      오른쪽 위 <b>⋮</b> 버튼 또는, 하단 <b>↑</b> 버튼에서 Safari/Chrome으로 열기를 선택해 주세요!
+      오른쪽 위 <b>⋮</b> 버튼 또는, 하단 <b>↑</b> 버튼에서 Safari/Chrome으로 열어주세요!
     </div>
     <input type="text" id="searchBox" placeholder="지역명으로 검색 (예: 경주)">
     <div id="results"></div>
@@ -172,10 +173,12 @@
       ※ 본 사이트는 다이소 및 아성다이소와 무관한 비공식 서비스입니다. 매장 정보의 정확성은 보장되지 않을 수 있으며, 공식 정보는 다이소 홈페이지를 참고해주세요.
     </div>
     <div class="footer-copyright">
-      © 2025 가맹점 위치 안내. 서비스 | All rights reserved. | 만든이: nayeonkim8294@gmail.com
+      © 2025 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: nayeonkim8294@gmail.com
     </div>
   </div>
 
+  <!-- 카카오맵 SDK (마지막에! 새 앱키 적용) -->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c335bf7b64cf3ae9c659bde98a24c81"></script>
   <script>
     // --- 카카오톡에서만 안내문구 보이기 ---
     function isKakaoTalk() {
@@ -246,7 +249,8 @@
       var resultsDiv = document.getElementById('results');
       resultsDiv.innerHTML = "";
       if (filteredStores.length === 0) {
-        resultsDiv.innerHTML = '<div class="no-result">해당 지역은 다이소 가맹점이 없습니다</div>';
+        // *** [검색 결과 없음 안내문구]만 교체 ***
+        resultsDiv.innerHTML = '<div class="no-result">해당지역은 아직 등록이 안됐습니다</div>';
         return;
       }
       filteredStores.forEach(function(store, idx){
@@ -274,7 +278,6 @@
 
     showResults(stores);
     showStores(stores);
-
   </script>
 </body>
 </html>
