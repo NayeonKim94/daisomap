@@ -224,11 +224,11 @@
       markers = [];
       infowindows = [];
       pageStores.forEach(function(store, idx){
-        // 완전한 카드형 스퀘어(화살표/테두리 말풍선 없이)
+        // 완전한 **스퀘어형 카드** (말풍선/화살표/테두리 없음, 스퀘어만! 가로 최대폭 제한)
         var infowindow = new kakao.maps.InfoWindow({
           content:
-            `<div style="max-width:370px; min-width:160px; width:auto; word-break:break-all; white-space:normal; font-size:15px; line-height:1.7; padding:14px 19px; font-family:'Malgun Gothic',Arial,sans-serif; box-sizing:border-box; border-radius:11px; background:#fff; border:0; box-shadow:0 2px 8px rgba(0,0,0,0.09);">
-              <b style="font-size:16px; display:block; margin-bottom:6px;">${store.name}</b>
+            `<div style="max-width:98vw; min-width:150px; width:auto; word-break:break-all; white-space:normal; font-size:15px; line-height:1.7; padding:13px 17px; font-family:'Malgun Gothic',Arial,sans-serif; box-sizing:border-box; border-radius:6px; background:#fff; border:0; box-shadow:0 2px 8px rgba(0,0,0,0.09);">
+              <b style="font-size:16px; display:block; margin-bottom:5px;">${store.name}</b>
               <span style="font-size:14px;">${store.address}</span><br>
               <span style="font-size:14px;">${store.tel}</span>
             </div>`,
