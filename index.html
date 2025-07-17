@@ -10,13 +10,13 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="민생회복 소비쿠폰, 다이소 가맹점 안내 – damap.kr">
   <meta property="og:description" content="전국 다이소 가맹점 안내 사이트 – 서울, 경기 등 지역별 매장 위치와 연락처, 실시간 검색 지원. 민생회복 소비쿠폰 사용 가능한 매장 정보를 한눈에 확인하세요.">
-  <meta property="og:image" content="https://www.damap.kr/damapimage.png"> <!-- 실제 파일 주소로 교체 -->
+  <meta property="og:image" content="https://www.damap.kr/damapimage.png">
   <meta property="og:url" content="https://www.damap.kr">
   <!-- 트위터 카드 -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="민생회복 소비쿠폰, 다이소 가맹점 안내 – damap.kr">
   <meta name="twitter:description" content="전국 다이소 가맹점 안내 사이트 – 서울, 경기 등 지역별 매장 위치와 연락처, 실시간 검색 지원. 민생회복 소비쿠폰 사용 가능한 매장 정보를 한눈에 확인하세요.">
-  <meta name="twitter:image" content="https://www.damap.kr/damapimage.png"> <!-- 실제 파일 주소로 교체 -->
+  <meta name="twitter:image" content="https://www.damap.kr/damapimage.png">
   <meta name="twitter:domain" content="damap.kr">
   <!-- 구글 서치콘솔 -->
   <meta name="google-site-verification" content="WnF2ei0gbsnq-e36FIffn4uhUWwkS6yNiJsrByOPc3Q" />
@@ -96,7 +96,6 @@
     <div id="results"></div>
     <div id="pagination"></div>
     <div id="map"></div>
-    <!-- 지도 바로 아래 안내문구! -->
     <footer>
       <div class="adnotice">
         이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
@@ -106,7 +105,6 @@
       </div>
       © 2025 가맹점 위치 안내 서비스 | All rights reserved. | 만든이: noystudiokr@gmail.com
     </footer>
-    <!-- 광고는 안내문구 아래! (쿠팡 공식문법) -->
     <div id="ad-vertical">
       <script src="https://ads-partners.coupang.com/g.js"></script>
       <script>
@@ -121,7 +119,6 @@
       </script>
     </div>
   </div>
-  <!-- 방문자수(히트카운터) - 지도 바깥 오른쪽 아래 고정 -->
   <a href="https://hits.sh/nayeonkim94.github.io/daisomap/" target="_blank" class="hits-counter">
     <img alt="Hits" src="https://hits.sh/nayeonkim94.github.io/daisomap.svg?view=today-total&style=flat-square&label=visitors&extraCount=1000&color=ffffff&labelColor=ffffff"/>
   </a>
@@ -137,18 +134,20 @@
       if (isKakaoInApp()) {
         document.getElementById('kakao-alert').style.display = 'block';
       }
-      // 10개 예시
+      // ★★★★★ 여기에 전체 매장 데이터를 붙여넣으세요 ★★★★★
       var stores = [
-        {name:"다이소 경북고령점",address:"경북 고령군 대가야읍 우륵로 18",tel:"054-954-8837",lat:35.73148218,lng:128.2695328},
-        {name:"다이소 경북성주점",address:"경북 성주군 성주읍 성주로 3268",tel:"054-933-7957",lat:35.91764482,lng:128.2911756},
-        {name:"다이소 경북영덕점",address:"경북 영덕군 영덕읍 덕곡길 89-1",tel:"054-733-2600",lat:36.41169907,lng:129.3696101},
-        {name:"다이소 경북영양점",address:"경북 영양군 영양읍 동서대로 116",tel:"054-683-3438",lat:36.66215509,lng:129.1220551},
-        {name:"다이소 경북울진점",address:"경북 울진군 울진읍 읍내8길 20",tel:"054-781-6016",lat:36.99461617,lng:129.4025065},
-        {name:"다이소 경북의성점",address:"경북 의성군 의성읍 문소3길 41",tel:"054-833-1156",lat:36.34967307,lng:128.695164},
-        {name:"다이소 경북청도점",address:"경북 청도군 청도읍 청화로 145",tel:"054-371-6018",lat:35.64489998,lng:128.7420125},
-        {name:"다이소 경북풍기점",address:"경북 영주시 풍기읍 소백로 1892",tel:"054-927-1892",lat:36.86593252,lng:128.5357008},
-        {name:"다이소 경산사동점",address:"경북 경산시 백자로 56",tel:"053-818-6016",lat:35.81090484,lng:128.7542483},
-        {name:"다이소 경산신대부적점",address:"경북 경산시 압량읍 대학로 367",tel:"053-816-6016",lat:35.84147958,lng:128.7603299}
+        {name:"다이소 가평점",address:"경기 가평군 가평읍 가화로 48-1 1-2층",tel:"070-8831-9749",lat:37.82433854,lng:127.5162253},
+        {name:"다이소 가평설악점",address:"경기 가평군 설악면 유명로 1674 2층",tel:"0507-1356-5972",lat:37.67849057,lng:127.4850282},
+        {name:"다이소 가평현리점",address:"경기 가평군 조종면 조종희망로 17",tel:"031-585-0428",lat:37.81872952,lng:127.3502408},
+        {name:"다이소 개포동점",address:"서울 강남구 선릉로 30 개포빌딩 지하1층",tel:"02-576-6016",lat:37.48251342,lng:127.0611747},
+        {name:"다이소 거여점",address:"서울 송파구 거마로 12 상형빌딩 지하1층",tel:"02-403-3001",lat:37.49390244,lng:127.145002},
+        {name:"다이소 거제상동점",address:"경남 거제시 상동5길 93 1층",tel:"055-634-0606",lat:34.8624715,lng:128.6313182},
+        {name:"다이소 거제장승포점",address:"경남 거제시 능포로2길 38 옥명대우아파트 상가 1층",tel:"055-681-9458",lat:34.87619518,lng:128.7349403},
+        {name:"다이소 거제장평점",address:"경남 거제시 장평로8길 17 정원빌딩 1-2층",tel:"0507-1437-8338",lat:34.89211763,lng:128.6103983},
+        {name:"다이소 거제중곡점",address:"경남 거제시 중곡1로2길 20 가산빌리지 1층",tel:"055-637-2007",lat:34.8943629,lng:128.6274132},
+        {name:"다이소 거제서정점",address:"경남 거제시 거제면 거제남서로 3446 1층",tel:"055-632-4300",lat:34.84847027,lng:128.5877933},
+        // (이하 전체 매장 그대로 모두 넣기)
+        {name:"다이소 흑석점",address:"서울 동작구 서달로 161-1",tel:"02-3280-6733",lat:37.5078135,lng:126.9622592}
       ];
       stores.sort((a,b)=>a.name.localeCompare(b.name,"ko"));
 
